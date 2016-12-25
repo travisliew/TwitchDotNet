@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Clients\TwitchClientAuthenticated.cs" />
     <Compile Include="Clients\TwitchClientUnauthenticated.cs" />
+    <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\BroadcastType.cs" />
     <Compile Include="Enums\Period.cs" />
     <Compile Include="Enums\SortBy.cs" />

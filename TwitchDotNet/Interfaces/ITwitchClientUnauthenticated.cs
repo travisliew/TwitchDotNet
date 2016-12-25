@@ -15,7 +15,7 @@ namespace TwitchDotNet.Interfaces {
 
         #region Channels - https://dev.twitch.tv/docs/v5/reference/channels/
         
-        dynamic GetChannelById(string _channelId);
+        dynamic GetChannel(string _channelId);
         dynamic GetChannelFollowers(string _channelId, Pagination _pagination = null, SortDirection _direction = SortDirection.desc);
         dynamic GetChannelTeams(string _channelId);
         dynamic GetChannelVideos(string _channelId, Pagination _pagination = null, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _language = default(List<string>), SortBy _sort = SortBy.time);
