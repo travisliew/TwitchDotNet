@@ -1,2 +1,2 @@
 # TwitchDotNet
-A .NET C# Library for Twitch API v5
+A .NETCore (UWP) C# Library for Twitch API v5
