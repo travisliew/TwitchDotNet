@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\TwitchClientAuthenticated.cs" />
+    <Compile Include="Clients\TwitchClientUnauthenticated.cs" />
+    <Compile Include="Enums\BroadcastType.cs" />
+    <Compile Include="Enums\SortBy.cs" />
+    <Compile Include="Enums\StreamType.cs" />
+    <Compile Include="Enums\SortDirection.cs" />
+    <Compile Include="Enums\SortKey.cs" />
+    <Compile Include="Enums\Period.cs" />
+    <Compile Include="Helpers\Pagination.cs" />
+    <Compile Include="Interfaces\ITwitchClientAuthenticated.cs" />
+    <Compile Include="Interfaces\ITwitchClientUnauthenticated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TwitchDotNet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A .NET C# Library for Twitch API v5")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TwitchDotNet")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright © 2016 Travis Liew")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
