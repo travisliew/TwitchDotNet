@@ -3,18 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26014.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchDotNet", "TwitchDotNet\TwitchDotNet.csproj", "{80F624FF-79B5-41BE-8A0B-E0E5AEE7B5AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchDotNet", "TwitchDotNet\TwitchDotNet.csproj", "{032C681C-C251-47D1-A6BF-EBC3751EFDAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80F624FF-79B5-41BE-8A0B-E0E5AEE7B5AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80F624FF-79B5-41BE-8A0B-E0E5AEE7B5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80F624FF-79B5-41BE-8A0B-E0E5AEE7B5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80F624FF-79B5-41BE-8A0B-E0E5AEE7B5AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|ARM.Build.0 = Debug|ARM
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|x64.ActiveCfg = Debug|x64
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|x64.Build.0 = Debug|x64
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|x86.ActiveCfg = Debug|x86
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Debug|x86.Build.0 = Debug|x86
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|ARM.ActiveCfg = Release|ARM
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|ARM.Build.0 = Release|ARM
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|x64.ActiveCfg = Release|x64
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|x64.Build.0 = Release|x64
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|x86.ActiveCfg = Release|x86
+		{032C681C-C251-47D1-A6BF-EBC3751EFDAA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
