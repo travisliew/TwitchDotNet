@@ -12,11 +12,15 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void ValidPagination()
         {
+            // Initialise (limit = 25, offset = 0)
             var pagination = new Pagination();
-            pagination.NextPage(); // Increment page
+            var oldLimit = pagination.Limit;
+            var oldOffset = pagination.Offset;
 
-            // Assert that NextPage increments offset by 25, leaving limit as-is
-            Assert.IsTrue(pagination.Limit == 25 && pagination.Offset == 25);
+            pagination.NextPage(); // Increment page (limit = 25, offset = 25)
+
+            // Assert that NextPage increments offset by limit, leaving limit as-is
+            Assert.IsTrue(pagination.Limit == oldLimit && pagination.Offset == oldOffset + oldLimit);
         }
     }
 }
