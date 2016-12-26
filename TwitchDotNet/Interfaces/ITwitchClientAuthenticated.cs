@@ -13,7 +13,7 @@ namespace TwitchDotNet.Interfaces {
     /// </summary>
     internal interface ITwitchClientAuthenticated {
 
-        #region ChannelFeed - https://dev.twitch.tv/docs/v5/reference/channel-feed/
+        #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 
         dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination = null, long _comments = 5);
         dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5);
@@ -29,7 +29,7 @@ namespace TwitchDotNet.Interfaces {
 
         #endregion
 
-        #region Channels - https://dev.twitch.tv/docs/v5/reference/channels/
+        #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
 
         dynamic GetChannel();
         dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled);
@@ -41,13 +41,13 @@ namespace TwitchDotNet.Interfaces {
 
         #endregion
 
-        #region Streams - https://dev.twitch.tv/docs/v5/reference/streams/
+        #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
         dynamic GetFollowedStreams(Pagination _pagination = null, StreamType _streamType = StreamType.live);
 
         #endregion
 
-        #region Users - https://dev.twitch.tv/docs/v5/reference/users/
+        #region Users - Https://dev.twitch.tv/docs/v5/reference/users/
 
         dynamic GetUser();
         dynamic GetUserEmotes(string _userId);
@@ -60,9 +60,9 @@ namespace TwitchDotNet.Interfaces {
 
         #endregion
 
-        #region Videos - https://dev.twitch.tv/docs/v5/reference/videos/
+        #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
 
-        dynamic GetFollowedVideos(Pagination _pagination = null, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight);
+        dynamic GetFollowedVideos(Pagination _pagination = null, BroadcastType _broadcastType = BroadcastType.highlight);
 
         #endregion
     }

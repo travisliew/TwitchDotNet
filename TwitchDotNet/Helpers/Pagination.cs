@@ -17,12 +17,17 @@ namespace TwitchDotNet.Helpers {
         /// <summary>
         /// Gets the Limit
         /// </summary>
-        public int Limit { get; }
+        public int Limit {
+            get { return _limit; }
+        }
 
         /// <summary>
         /// Gets the Offset
         /// </summary>
-        public int Offset { get; private set; }
+        public int Offset {
+            get { return _offset; }
+            set { _offset = value; }
+        }
 
         /// <summary>
         /// Increments the offset by limit value to provide next page Pagination info

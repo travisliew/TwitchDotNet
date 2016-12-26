@@ -22,9 +22,9 @@
         types or methods decorated with an attribute.
 
     For more information on writing Runtime Directives for libraries, please visit
-    https://go.microsoft.com/fwlink/?LinkID=391919
+    Https://go.microsoft.com/fwlink/?LinkID=391919
 -->
-<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+<Directives xmlns="Http://schemas.microsoft.com/netfx/2013/01/metadata">
   <Library Name="TwitchDotNet">
 
   	<!-- add directives for your library here -->
