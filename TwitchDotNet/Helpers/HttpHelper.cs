@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Web.Http;
+using System.Net.Http;
+using System.Net;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace TwitchDotNet.Helpers {
 
@@ -37,6 +40,27 @@ namespace TwitchDotNet.Helpers {
         /// <returns>A HttpRequest</returns>
         public HttpRequestMessage CreateHttpRequest(string _url, HttpMethod _requestType) {
             return new HttpRequestMessage(_requestType, new Uri($"{this.baseUrl}/{_url}"));
+        }
+
+        /// <summary>
+        /// Send a HttpRequestMessage
+        /// </summary>
+        /// <param name="_request">HttpRequestMessage to send</param>
+        /// <returns>String representing returned content</returns>
+        public async Task<dynamic> SendMessage(HttpRequestMessage _request) {
+            var response = await httpClient.SendAsync(_request).ConfigureAwait(false);
+            try {
+                // Ensure successful response
+                response.EnsureSuccessStatusCode();
+
+                // Read response content as byte array and decode as UTF-8
+                var response_buffer = await response.Content.ReadAsByteArrayAsync();
+                var response_string = Encoding.UTF8.GetString(response_buffer, 0, response_buffer.Length);
+                return JsonConvert.DeserializeObject(response_string);
+            } catch (Exception ex) {
+                Debug.WriteLine($"An error occurred while sending off a HttpRequest.\n\n{ex.ToString()}");
+            }
+            return null;
         }
 
         /// <summary>

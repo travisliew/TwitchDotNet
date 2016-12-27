@@ -1,6 +1,7 @@
 ﻿using TwitchDotNet.Enums;
 using TwitchDotNet.Helpers;
 using TwitchDotNet.Interfaces;
+using System.Net.Http;
 
 namespace TwitchDotNet.Clients {
 
@@ -13,9 +14,10 @@ namespace TwitchDotNet.Clients {
         /// <summary>
         /// Initialise HttpClient with headers for authenticated requests
         /// </summary>
+        /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>
         /// <param name="_oauthToken">OAuth Token header</param>
-        public TwitchClientAuthenticated(string _clientId, string _oauthToken) : base(_clientId) {
+        public TwitchClientAuthenticated(string _baseUrl, string _clientId, string _oauthToken) : base(_baseUrl, _clientId) {
             // Add authentication header to HttpHelper client
             httpHelperClient.AddHeader("Authorization", $"OAuth {_oauthToken}");
         }

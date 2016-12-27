@@ -2,7 +2,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TwitchDotNet.Helpers;
-using Windows.Web.Http;
+using System.Net.Http;
+using Windows.ApplicationModel.Resources;
 
 namespace TwitchDotNet.Tests
 {

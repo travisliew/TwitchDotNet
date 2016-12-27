@@ -117,6 +117,7 @@
     <Compile Include="Enums\SortKey.cs" />
     <Compile Include="Enums\StreamType.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Helpers\OAuth2Broker.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Interfaces\ITwitchClientAuthenticated.cs" />
     <Compile Include="Interfaces\ITwitchClientUnauthenticated.cs" />

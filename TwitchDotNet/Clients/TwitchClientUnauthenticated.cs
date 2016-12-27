@@ -2,6 +2,9 @@
 using TwitchDotNet.Enums;
 using TwitchDotNet.Helpers;
 using TwitchDotNet.Interfaces;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace TwitchDotNet.Clients {
 
@@ -12,14 +15,14 @@ namespace TwitchDotNet.Clients {
     public class TwitchClientUnauthenticated : ITwitchClientUnauthenticated {
 
         protected readonly HttpHelper httpHelperClient;
-        private static string TWITCH_BASE_URL = "";
 
         /// <summary>
         /// Initialise HttpClient with headers for unauthenticated requests
         /// </summary>
+        /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>
-        public TwitchClientUnauthenticated(string _clientId) {
-            httpHelperClient = new HttpHelper(TWITCH_BASE_URL, _clientId);
+        public TwitchClientUnauthenticated(string _baseUrl, string _clientId) {
+            httpHelperClient = new HttpHelper(_baseUrl, _clientId);
         }
 
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
@@ -254,7 +257,16 @@ namespace TwitchDotNet.Clients {
         /// <param name="_period">Period range <see cref="Enums.Period"/></param>
         /// <param name="_broadcastType">Broadcast type <see cref="Enums.BroadcastType"/></param>
         /// <returns></returns>
-        public dynamic GetTopVideos(Pagination _pagination = null, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight) { return null; }
+        public dynamic GetTopVideos(Pagination _pagination = null, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight) {
+            var request = httpHelperClient.CreateHttpRequest("videos/top", HttpMethod.Get);
+
+            // Add query strings
+            httpHelperClient.AddQueryString(request, _pagination ?? new Pagination());
+            if (!string.IsNullOrEmpty(_game)) { httpHelperClient.AddQueryString(request, "game", _game); }
+            httpHelperClient.AddQueryString(request, "period", _period.ToString());
+            httpHelperClient.AddQueryString(request, "broadcast_type", _broadcastType.ToString());
+            return httpHelperClient.SendMessage(request).Result; // Send
+        }
 
         #endregion
     }
