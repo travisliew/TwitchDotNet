@@ -47,7 +47,7 @@ namespace TwitchDotNet.Helpers {
         /// </summary>
         /// <param name="_request">HttpRequestMessage to send</param>
         /// <returns>String representing returned content</returns>
-        public async Task<dynamic> SendMessage(HttpRequestMessage _request) {
+        public async Task<dynamic> ExecuteRequest(HttpRequestMessage _request) {
             var response = await httpClient.SendAsync(_request).ConfigureAwait(false);
             try {
                 // Ensure successful response

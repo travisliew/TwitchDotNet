@@ -2,6 +2,7 @@
 using TwitchDotNet.Helpers;
 using TwitchDotNet.Interfaces;
 using System.Net.Http;
+using System;
 
 namespace TwitchDotNet.Clients {
 
@@ -21,6 +22,14 @@ namespace TwitchDotNet.Clients {
             // Add authentication header to HttpHelper client
             httpHelperClient.AddHeader("Authorization", $"OAuth {_oauthToken}");
         }
+
+        #region General
+
+        public dynamic GetIdByName(string _name) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 

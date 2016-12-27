@@ -13,6 +13,12 @@ namespace TwitchDotNet.Interfaces {
     /// </summary>
     internal interface ITwitchClientAuthenticated {
 
+        #region General
+
+        dynamic GetIdByName(string _name);
+
+        #endregion
+
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 
         dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination = null, long _comments = 5);

@@ -25,7 +25,7 @@ namespace TwitchDotNet.Interfaces {
         #region Chat - Https://dev.twitch.tv/docs/v5/reference/chat/
 
         dynamic GetChatBadgesByChannel(string _channelId);
-        dynamic GetChatBadgesBySet(string _emoteSets = default(string));
+        dynamic GetChatBadgesBySet(List<string> _emoteSets = default(List<string>));
         dynamic GetEmoticons();
 
         #endregion
@@ -46,13 +46,13 @@ namespace TwitchDotNet.Interfaces {
 
         dynamic SearchChannels(string _query, Pagination _pagination = null);
         dynamic SearchStreams(string _query, Pagination _pagination = null, bool _hls = true);
-        dynamic SearchGames(string _query, SearchType _type = SearchType.suggest, bool _live = false);
+        dynamic SearchGames(string _query, bool _live = false);
 
         #endregion
 
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
-        dynamic GetStreams();
+        dynamic GetStreams(string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>), Pagination _pagination = null);
         dynamic GetStream(string _channelId, StreamType _streamType = StreamType.live);
         dynamic GetFeaturedStreams(Pagination _pagination = null);
         dynamic GetStreamsSummary(string _game = default(string));
