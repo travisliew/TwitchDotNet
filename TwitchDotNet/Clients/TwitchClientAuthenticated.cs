@@ -18,7 +18,7 @@ namespace TwitchDotNet.Clients {
     public class TwitchClientAuthenticated : TwitchClientUnauthenticated, ITwitchClientAuthenticated {
 
         /// <summary>
-        /// Initialise HttpClient with headers for authenticated requests
+        /// Initialise HttpClient for authenticated requests
         /// </summary>
         /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>

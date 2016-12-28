@@ -18,7 +18,7 @@ namespace TwitchDotNet.Clients {
         protected readonly HttpHelper httpHelperClient;
 
         /// <summary>
-        /// Initialise HttpClient with headers for unauthenticated requests
+        /// Initialise HttpClient for unauthenticated requests
         /// </summary>
         /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>
