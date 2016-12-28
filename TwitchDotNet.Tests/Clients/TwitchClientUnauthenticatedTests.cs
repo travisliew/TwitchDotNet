@@ -16,7 +16,7 @@ namespace TwitchDotNet.Tests
         private ResourceLoader resourceLoader = new ResourceLoader();
         private TwitchClientUnauthenticated twitchClientUnauthenticated;
 
-        [TestInitialize]
+        [ClassInitialize]
         public void Initialise()
         {
             // Retrieve config from Resources.resw
@@ -38,7 +38,7 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void Test_GetChannelFollowers() {
             string channelId = "28036688";
-            Assert.IsNotNull(twitchClientUnauthenticated.GetChannelFollowers(channelId));
+            Assert.IsNotNull(twitchClientUnauthenticated.GetChannelFollowers(channelId, new Pagination()));
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void Test_GetChannelVideos() {
             string channelId = "28036688";
-            Assert.IsNotNull(twitchClientUnauthenticated.GetChannelVideos(channelId));
+            Assert.IsNotNull(twitchClientUnauthenticated.GetChannelVideos(channelId, new Pagination()));
         }
 
         #endregion
@@ -79,7 +79,7 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetTopGames() {
-            Assert.IsNotNull(twitchClientUnauthenticated.GetTopGames());
+            Assert.IsNotNull(twitchClientUnauthenticated.GetTopGames(new Pagination()));
         }
 
         #endregion
@@ -98,13 +98,13 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void Test_SearchChannels() {
             string query = "star";
-            Assert.IsNotNull(twitchClientUnauthenticated.SearchChannels(query));
+            Assert.IsNotNull(twitchClientUnauthenticated.SearchChannels(query, new Pagination()));
         }
 
         [TestMethod]
         public void Test_SearchStreams() {
             string query = "star";
-            Assert.IsNotNull(twitchClientUnauthenticated.SearchStreams(query));
+            Assert.IsNotNull(twitchClientUnauthenticated.SearchStreams(query, new Pagination()));
         }
 
         [TestMethod]
@@ -119,19 +119,18 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetStreams() { 
-            Assert.IsNotNull(twitchClientUnauthenticated.GetStreams());
+            Assert.IsNotNull(twitchClientUnauthenticated.GetStreams(new Pagination()));
         }
 
         [TestMethod]
         public void Test_GetStream() {
-            // Dummy data (from Twitch API docs)
             string channelId = "28036688";
             Assert.IsNotNull(twitchClientUnauthenticated.GetStream(channelId));
         }
 
         [TestMethod]
         public void Test_GetFeaturedStreams() {
-            Assert.IsNotNull(twitchClientUnauthenticated.GetFeaturedStreams());
+            Assert.IsNotNull(twitchClientUnauthenticated.GetFeaturedStreams(new Pagination()));
         }
 
         [TestMethod]
@@ -145,7 +144,7 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetTeams() {
-            Assert.IsNotNull(twitchClientUnauthenticated.GetTeams());
+            Assert.IsNotNull(twitchClientUnauthenticated.GetTeams(new Pagination()));
         }
 
         [TestMethod]
@@ -160,16 +159,14 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetUser() {
-            // Dummy data (from Twitch API docs)
             string userId = "28036688";
-
             Assert.IsNotNull(twitchClientUnauthenticated.GetUser(userId));
         }
 
         [TestMethod]
         public void Test_GetUserFollowedChannels() {
             string userId = "28036688";
-            Assert.IsNotNull(twitchClientUnauthenticated.GetUserFollowedChannels(userId));
+            Assert.IsNotNull(twitchClientUnauthenticated.GetUserFollowedChannels(userId, new Pagination()));
         }
 
 
@@ -191,14 +188,18 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetVideo() {
-            // Dummy data (from Twitch API docs)
+            // https://www.twitch.tv/twitch/v/106400740
             string videoId = "106400740";
             Assert.IsNotNull(twitchClientUnauthenticated.GetVideo(videoId));
         }
 
         [TestMethod]
         public void Test_GetTopVideos() {
-            Assert.IsNotNull(twitchClientUnauthenticated.GetTopVideos());
+            Assert.IsNotNull(twitchClientUnauthenticated.GetTopVideos(new Pagination()));
+
+            // With game
+            string game = "Overwatch";
+            Assert.IsNotNull(twitchClientUnauthenticated.GetTopVideos(new Pagination(), game));
         }
 
         #endregion

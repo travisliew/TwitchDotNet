@@ -16,9 +16,9 @@ namespace TwitchDotNet.Interfaces {
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
         
         dynamic GetChannel(string _channelId);
-        dynamic GetChannelFollowers(string _channelId, Pagination _pagination = null, SortDirection _direction = SortDirection.desc);
+        dynamic GetChannelFollowers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.desc);
         dynamic GetChannelTeams(string _channelId);
-        dynamic GetChannelVideos(string _channelId, Pagination _pagination = null, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _language = default(List<string>), SortBy _sort = SortBy.time);
+        dynamic GetChannelVideos(string _channelId, Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _language = default(List<string>), SortBy _sort = SortBy.time);
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace TwitchDotNet.Interfaces {
 
         #region Games - Https://dev.twitch.tv/docs/v5/reference/games/
 
-        dynamic GetTopGames(Pagination _pagination = null);
+        dynamic GetTopGames(Pagination _pagination);
 
         #endregion
 
@@ -44,24 +44,24 @@ namespace TwitchDotNet.Interfaces {
 
         #region Search - Https://dev.twitch.tv/docs/v5/reference/search/
 
-        dynamic SearchChannels(string _query, Pagination _pagination = null);
-        dynamic SearchStreams(string _query, Pagination _pagination = null, bool _hls = true);
+        dynamic SearchChannels(string _query, Pagination _pagination);
+        dynamic SearchStreams(string _query, Pagination _pagination, bool _hls = true);
         dynamic SearchGames(string _query, bool _live = false);
 
         #endregion
 
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
-        dynamic GetStreams(string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>), Pagination _pagination = null);
+        dynamic GetStreams(Pagination _pagination, string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>));
         dynamic GetStream(string _channelId, StreamType _streamType = StreamType.live);
-        dynamic GetFeaturedStreams(Pagination _pagination = null);
+        dynamic GetFeaturedStreams(Pagination _pagination);
         dynamic GetStreamsSummary(string _game = default(string));
 
         #endregion
 
         #region Teams - Https://dev.twitch.tv/docs/v5/reference/teams/
 
-        dynamic GetTeams(Pagination _pagination = null);
+        dynamic GetTeams(Pagination _pagination);
         dynamic GetTeam(string _teamName);
 
         #endregion
@@ -69,7 +69,7 @@ namespace TwitchDotNet.Interfaces {
         #region Users - Https://dev.twitch.tv/docs/v5/reference/users/
         
         dynamic GetUser(string _userId);
-        dynamic GetUserFollowedChannels(string _userId, Pagination _pagination = null, SortDirection _direction = SortDirection.desc, SortKey _sortBy = SortKey.created_at);
+        dynamic GetUserFollowedChannels(string _userId, Pagination _pagination, SortDirection _direction = SortDirection.desc, SortKey _sortBy = SortKey.created_at);
         dynamic CheckUserFollowsByChannel(string _userId, string _channelId);
 
         #endregion
@@ -77,7 +77,7 @@ namespace TwitchDotNet.Interfaces {
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
 
         dynamic GetVideo(string _videoId);
-        dynamic GetTopVideos(Pagination _pagination = null, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight);
+        dynamic GetTopVideos(Pagination _pagination, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight);
 
         #endregion
     }

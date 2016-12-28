@@ -41,7 +41,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_comments">Number of comments to retrieve</param>
         /// <returns></returns>
-        public dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination = null, long _comments = 5) { return null; }
+        public dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination, long _comments = 5) { return null; }
 
         /// <summary>
         /// Gets a specified post from a specified channel feed.
@@ -100,7 +100,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
-        public dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination = null) { return null; }
+        public dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination) { return null; }
 
         /// <summary>
         /// Creates a comment to a specified post in a specified channel feed.
@@ -183,7 +183,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_direction">Sort direction <see cref="Enums.SortDirection"/></param>
         /// <returns></returns>
-        public dynamic GetChannelSubscribers(string _channelId, Pagination _pagination = null, SortDirection _direction = SortDirection.asc) { return null; }
+        public dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc) { return null; }
 
         /// <summary>
         /// Checks if a specified channel has a specified user subscribed to it.
@@ -221,7 +221,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_streamType">Stream type <see cref="Enums.StreamType"/></param>
         /// <returns></returns>
-        public dynamic GetFollowedStreams(Pagination _pagination = null, StreamType _streamType = StreamType.live) { return null; }
+        public dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live) { return null; }
 
         #endregion
 
@@ -277,7 +277,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
-        public dynamic GetUserBlockList(string _userId, Pagination _pagination = null) { return null; }
+        public dynamic GetUserBlockList(string _userId, Pagination _pagination) { return null; }
 
         /// <summary>
         /// Blocks the target user.
@@ -308,7 +308,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_broadcastType">Broadcast type <see cref="Enums.BroadcastType"/></param>
         /// <returns></returns>
-        public dynamic GetFollowedVideos(Pagination _pagination = null, BroadcastType _broadcastType = BroadcastType.highlight) { return null; }
+        public dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight) { return null; }
 
         #endregion
     }

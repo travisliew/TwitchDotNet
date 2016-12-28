@@ -21,13 +21,13 @@ namespace TwitchDotNet.Interfaces {
 
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 
-        dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination = null, long _comments = 5);
+        dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination, long _comments = 5);
         dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5);
         dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false);
         dynamic DeleteChannelFeedPost(string _channelId, string _postId);
         dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
         dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
-        dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination = null);
+        dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination);
         dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content);
         dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId);
         dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);
@@ -40,7 +40,7 @@ namespace TwitchDotNet.Interfaces {
         dynamic GetChannel();
         dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled);
         dynamic GetChannelEditors(string _channelId);
-        dynamic GetChannelSubscribers(string _channelId, Pagination _pagination = null, SortDirection _direction = SortDirection.asc);
+        dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc);
         dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId);
         dynamic StartChannelCommercial(string _channelId);
         dynamic ResetChannelStreamKey(string _channelId);
@@ -49,7 +49,7 @@ namespace TwitchDotNet.Interfaces {
 
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
-        dynamic GetFollowedStreams(Pagination _pagination = null, StreamType _streamType = StreamType.live);
+        dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live);
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace TwitchDotNet.Interfaces {
         dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId);
         dynamic FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false);
         dynamic UnfollowChannel(string _userId, string _targetChannelId);
-        dynamic GetUserBlockList(string _userId, Pagination _pagination = null);
+        dynamic GetUserBlockList(string _userId, Pagination _pagination);
         dynamic BlockUser(string _userId, string _targetUserId);
         dynamic UnblockUser(string _userId, string _targetUserId);
 
@@ -68,7 +68,7 @@ namespace TwitchDotNet.Interfaces {
 
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
 
-        dynamic GetFollowedVideos(Pagination _pagination = null, BroadcastType _broadcastType = BroadcastType.highlight);
+        dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight);
 
         #endregion
     }
