@@ -11,20 +11,20 @@ namespace TwitchDotNet.Helpers {
     /// </summary>
     public class Pagination {
 
-        private int _limit = 25;
-        private int _offset = 0;
+        private long _limit = 25;
+        private long _offset = 0;
 
         /// <summary>
-        /// Gets the Limit
+        /// Limit
         /// </summary>
-        public int Limit {
+        public long Limit {
             get { return _limit; }
         }
 
         /// <summary>
-        /// Gets the Offset
+        /// Offset
         /// </summary>
-        public int Offset {
+        public long Offset {
             get { return _offset; }
             set { _offset = value; }
         }

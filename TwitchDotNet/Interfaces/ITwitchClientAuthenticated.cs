@@ -21,13 +21,13 @@ namespace TwitchDotNet.Interfaces {
 
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 
-        dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination, long _comments = 5);
+        dynamic GetChannelFeedPosts(string _channelId, CursorPagination _pagination, long _comments = 5);
         dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5);
         dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false);
         dynamic DeleteChannelFeedPost(string _channelId, string _postId);
         dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
         dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
-        dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination);
+        dynamic GetChannelFeedPostComments(string _channelId, string _postId, CursorPagination _pagination);
         dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content);
         dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId);
         dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);

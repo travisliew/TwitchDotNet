@@ -11,12 +11,12 @@ namespace TwitchDotNet.Tests {
     [TestClass]
     public class TwitchClientAuthenticatedTests {
 
-        private ResourceLoader resourceLoader = new ResourceLoader();
-        private TwitchClientAuthenticated twitchClientAuthenticated;
+        private static ResourceLoader resourceLoader = new ResourceLoader();
+        private static TwitchClientAuthenticated twitchClientAuthenticated;
 
         // Initialise base variables
         [ClassInitialize]
-        public void Initialise() {
+        public static void Initialise(TestContext context) {
             // Retrieve config from Resources.resw
             string baseUrl = resourceLoader.GetString("TWITCH_API_BASE_URL");
             string clientId = resourceLoader.GetString("CLIENT_ID");
@@ -29,14 +29,22 @@ namespace TwitchDotNet.Tests {
             twitchClientAuthenticated = new TwitchClientAuthenticated(baseUrl, clientId, oauthToken);
         }
 
-        #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
-
-        [TestMethod] public void Test_GetChannelFeedPosts() {
-            string channelId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPosts(channelId, new Pagination()));
+        [TestMethod]
+        public void Test_GetIdByName() {
+            string name = "trick2g";
+            Assert.IsNotNull(twitchClientAuthenticated.GetIdByName(name));
         }
 
-        [TestMethod] public void Test_GetChannelFeedPost() {
+        #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
+
+        [TestMethod]
+        public void Test_GetChannelFeedPosts() {
+            string channelId = "32220409"; // travy92
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPosts(channelId, new CursorPagination()));
+        }
+
+        [TestMethod]
+        public void Test_GetChannelFeedPost() {
             string channelId = "32220409"; // travy92
             string postId = "322204091482884560";
             Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPost(channelId, postId));
@@ -44,7 +52,8 @@ namespace TwitchDotNet.Tests {
 
         // Test_CreateChannelFeedPost
         // Test_DeleteChannelFeedPost
-        [TestMethod] public void Test_CreateAndDeleteChannelFeedPost(string _channelId, string _content, bool _share = false) {
+        [TestMethod]
+        public void Test_CreateAndDeleteChannelFeedPost() {
             string channelId = "32220409"; // travy92
             string content = "Test Post from TwitchDotNet Unit Test";
 
@@ -75,7 +84,7 @@ namespace TwitchDotNet.Tests {
         public void Test_GetChannelFeedPostComments() {
             string channelId = "32220409"; // travy92
             string postId = "322204091482884560";
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPostComments(channelId, postId, new Pagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPostComments(channelId, postId, new CursorPagination()));
         }
 
         // Test_CreateChannelFeedPostComment
@@ -102,7 +111,7 @@ namespace TwitchDotNet.Tests {
             string postId = "322204091482884560";
             string commentId = "157121";
             string emoteId = "endorse";
-
+            
             // Create reaction to post comment
             Assert.IsNotNull(twitchClientAuthenticated.CreateReactionToChannelFeedPostComment(channelId, postId, commentId, emoteId));
 
@@ -123,7 +132,7 @@ namespace TwitchDotNet.Tests {
         public void Test_UpdateChannel() {
             string channelId = "32220409"; // travy92
             string status = "test";
-            string game = "test";
+            string game = "League of Legends";
             string delay = "0";
             bool channelFeedEnabled = false;
             Assert.IsNotNull(twitchClientAuthenticated.UpdateChannel(channelId, status, game, delay, channelFeedEnabled));
@@ -144,7 +153,7 @@ namespace TwitchDotNet.Tests {
         [TestMethod]
         public void Test_CheckChannelSubscriptionByUser() {
             string channelId = "28036688"; // trick2g
-            string targetUserId = "32220409"; // travy92
+            string targetUserId = "29201680"; // xanbot
             Assert.IsNotNull(twitchClientAuthenticated.CheckChannelSubscriptionByUser(channelId, targetUserId));
         }
 

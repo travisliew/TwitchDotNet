@@ -52,7 +52,7 @@ namespace TwitchDotNet.Helpers {
             try {
                 // Ensure successful response
                 response.EnsureSuccessStatusCode();
-
+                
                 // Read response content as byte array and decode as UTF-8
                 var response_buffer = await response.Content.ReadAsByteArrayAsync();
                 var response_string = Encoding.UTF8.GetString(response_buffer, 0, response_buffer.Length);
@@ -68,7 +68,7 @@ namespace TwitchDotNet.Helpers {
         /// </summary>
         /// <param name="_key">Header Key</param>
         /// <param name="_value">Header Value</param>
-        public void AddHeader(string _key, string _value) {
+        public void AddHttpClientHeader(string _key, string _value) {
             // Only add header if _value is not empty
             if (!string.IsNullOrEmpty(_value)) {
                 httpClient.DefaultRequestHeaders.Add(_key, _value);
@@ -107,6 +107,16 @@ namespace TwitchDotNet.Helpers {
         public void AddQueryString(HttpRequestMessage _request, Pagination _pagination) {
             this.AddQueryString(_request, "limit", _pagination.Limit.ToString());
             this.AddQueryString(_request, "offset", _pagination.Offset.ToString());
+        }
+
+        /// <summary>
+        /// Adds cursor pagination info as query string to a Http Request
+        /// </summary>
+        /// <param name="_request">The HttpRequest</param>
+        /// <param name="_pagination">Pagination info</param>
+        public void AddQueryString(HttpRequestMessage _request, CursorPagination _pagination) {
+            this.AddQueryString(_request, "limit", _pagination.Limit.ToString());
+            this.AddQueryString(_request, "cursor", _pagination.Cursor);
         }
     }
 }

@@ -13,12 +13,11 @@ namespace TwitchDotNet.Tests
     [TestClass]
     public class TwitchClientUnauthenticatedTests {
 
-        private ResourceLoader resourceLoader = new ResourceLoader();
-        private TwitchClientUnauthenticated twitchClientUnauthenticated;
+        private static ResourceLoader resourceLoader = new ResourceLoader();
+        private static TwitchClientUnauthenticated twitchClientUnauthenticated;
 
         [ClassInitialize]
-        public void Initialise()
-        {
+        public static void Initialise(TestContext context) {
             // Retrieve config from Resources.resw
             string baseUrl = resourceLoader.GetString("TWITCH_API_BASE_URL");
             string clientId = resourceLoader.GetString("CLIENT_ID");

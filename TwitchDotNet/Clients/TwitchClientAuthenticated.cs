@@ -3,6 +3,10 @@ using TwitchDotNet.Helpers;
 using TwitchDotNet.Interfaces;
 using System.Net.Http;
 using System;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace TwitchDotNet.Clients {
 
@@ -20,13 +24,15 @@ namespace TwitchDotNet.Clients {
         /// <param name="_oauthToken">OAuth Token header</param>
         public TwitchClientAuthenticated(string _baseUrl, string _clientId, string _oauthToken) : base(_baseUrl, _clientId) {
             // Add authentication header to HttpHelper client
-            httpHelperClient.AddHeader("Authorization", $"OAuth {_oauthToken}");
+            httpHelperClient.AddHttpClientHeader("Authorization", $"OAuth {_oauthToken}");
         }
 
         #region General
 
         public dynamic GetIdByName(string _name) {
-            throw new NotImplementedException();
+            var request = httpHelperClient.CreateHttpRequest($"users", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, "login", _name);
+            return httpHelperClient.ExecuteRequest(request).Result;
         }
 
         #endregion
@@ -38,10 +44,15 @@ namespace TwitchDotNet.Clients {
         /// Https://dev.twitch.tv/docs/v5/reference/channel-feed/#get-multiple-feed-posts
         /// </summary>
         /// <param name="_channelId">Channel Id</param>
-        /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
+        /// <param name="_cursorPagination">Cursor Pagination info <see cref="Helpers.CursorPagination"/></param>
         /// <param name="_comments">Number of comments to retrieve</param>
         /// <returns></returns>
-        public dynamic GetChannelFeedPosts(string _channelId, Pagination _pagination, long _comments = 5) { return null; }
+        public dynamic GetChannelFeedPosts(string _channelId, CursorPagination _pagination, long _comments = 5) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            httpHelperClient.AddQueryString(request, "comments", _comments.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets a specified post from a specified channel feed.
@@ -51,7 +62,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_comments">Number of comments to retrieve</param>
         /// <returns></returns>
-        public dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5) { return null; }
+        public dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, "comments", _comments.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Creates a post in a specified channel feed.
@@ -61,7 +76,12 @@ namespace TwitchDotNet.Clients {
         /// <param name="_content">Content of the post</param>
         /// <param name="_share">If true, share a link to the post on the channel's Twitter feed (if connected)</param>
         /// <returns></returns>
-        public dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false) { return null; }
+        public dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts", HttpMethod.Post);
+            httpHelperClient.AddQueryString(request, "content", _content);
+            httpHelperClient.AddQueryString(request, "share", _share.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes a specified post in a specified channel feed.
@@ -70,7 +90,9 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <param name="_postId">Post Id to delete</param>
         /// <returns></returns>
-        public dynamic DeleteChannelFeedPost(string _channelId, string _postId) { return null; }
+        public dynamic DeleteChannelFeedPost(string _channelId, string _postId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request).Result; ; }
 
         /// <summary>
         /// reates a reaction to a specified post in a specified channel feed.
@@ -80,7 +102,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_emoteId">Reaction emote to create</param>
         /// <returns></returns>
-        public dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) { return null; }
+        public dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Post);
+            httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes a specified reaction to a specified post in a specified channel feed.
@@ -90,7 +116,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_emoteId">Reaction emote to delete</param>
         /// <returns></returns>
-        public dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) { return null; }
+        public dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Delete);
+            httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets all comments on a specified post in a specified channel feed.
@@ -98,9 +128,13 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_channelId">Channel Id</param>
         /// <param name="_postId">Post Id</param>
-        /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
+        /// <param name="_pagination">Pagination info <see cref="Helpers.CursorPagination"/></param>
         /// <returns></returns>
-        public dynamic GetChannelFeedPostComments(string _channelId, string _postId, Pagination _pagination) { return null; }
+        public dynamic GetChannelFeedPostComments(string _channelId, string _postId, CursorPagination _pagination) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Creates a comment to a specified post in a specified channel feed.
@@ -110,7 +144,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_content">Content of the comment</param>
         /// <returns></returns>
-        public dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content) { return null; }
+        public dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Post);
+            httpHelperClient.AddQueryString(request, "content", _content);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes a specified comment on a specified post in a specified channel feed.
@@ -120,7 +158,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id</param>
         /// <param name="_commentId">Comment Id to delete</param>
         /// <returns></returns>
-        public dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId) { return null; }
+        public dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Creates a reaction to a specified comment on a specified post in a specified channel feed.
@@ -131,7 +172,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_commentId">Comment Id</param>
         /// <param name="_emoteId">Reaction emote to create</param>
         /// <returns></returns>
-        public dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) { return null; }
+        public dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Post);
+            httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes a reaction to a specified comment on a specified post in a specified channel feed.
@@ -142,7 +187,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_commentId">Comment Id</param>
         /// <param name="_emoteId">Reaction emote to delete</param>
         /// <returns></returns>
-        public dynamic DeleteReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) { return null; }
+        public dynamic DeleteReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) {
+            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Delete);
+            httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         #endregion
 
@@ -153,7 +202,10 @@ namespace TwitchDotNet.Clients {
         /// Https://dev.twitch.tv/docs/v5/reference/channels/#get-channel
         /// </summary>
         /// <returns></returns>
-        public dynamic GetChannel() { return null; }
+        public dynamic GetChannel() {
+            var request = httpHelperClient.CreateHttpRequest($"channel", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Updates specified properties of a specified channel.
@@ -165,7 +217,20 @@ namespace TwitchDotNet.Clients {
         /// <param name="_delay">Channel delay in seconds</param>
         /// <param name="_channelFeedEnabled">If true, the channel's feed is turned on, false otherwise</param>
         /// <returns></returns>
-        public dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled) { return null; }
+        public dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled) {
+            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}", HttpMethod.Put);
+
+            // Only add as property if it is explicitly set, otherwise we will be overriding when not intending to
+            var properties = new JObject();
+            properties["channel"] = new JObject();
+            if (_status != null) { properties["channel"]["status"] = _status; }
+            if (_game != null) { properties["channel"]["game"] = _game; }
+            if (_delay != null) { properties["channel"]["delay"] = _delay; }
+            if (_channelFeedEnabled) { properties["channel"]["channel_feed_enabled"] = _channelFeedEnabled.ToString(); }
+
+            request.Content = new StringContent(properties.ToString(), Encoding.UTF8,"application/json");
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets a list of users who are editors for a specified channel.
@@ -173,7 +238,10 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
-        public dynamic GetChannelEditors(string _channelId) { return null; }
+        public dynamic GetChannelEditors(string _channelId) {
+            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/editors", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets a list of users subscribed to a specified channel, sorted by the date when they subscribed.
@@ -183,7 +251,12 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_direction">Sort direction <see cref="Enums.SortDirection"/></param>
         /// <returns></returns>
-        public dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc) { return null; }
+        public dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc) {
+            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/subscriptions", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            httpHelperClient.AddQueryString(request, "direction", _direction.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Checks if a specified channel has a specified user subscribed to it.
@@ -192,7 +265,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <param name="_targetUserId">Target User Id to check</param>
         /// <returns></returns>
-        public dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId) { return null; }
+        public dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId) {
+            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/subscriptions/{_targetUserId}", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Starts a commercial (advertisement) on a specified channel.
@@ -200,7 +276,10 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
-        public dynamic StartChannelCommercial(string _channelId) { return null; }
+        public dynamic StartChannelCommercial(string _channelId) {
+            var request = httpHelperClient.CreateHttpRequest($"channel/{_channelId}/commercial", HttpMethod.Post);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes the stream key for a specified channel.
@@ -208,7 +287,10 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
-        public dynamic ResetChannelStreamKey(string _channelId) { return null; }
+        public dynamic ResetChannelStreamKey(string _channelId) {
+            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/stream_key", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         #endregion
 
@@ -221,7 +303,12 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_streamType">Stream type <see cref="Enums.StreamType"/></param>
         /// <returns></returns>
-        public dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live) { return null; }
+        public dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live) {
+            var request = httpHelperClient.CreateHttpRequest($"streams/followed", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            httpHelperClient.AddQueryString(request, "stream_type", _streamType.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         #endregion
 
@@ -232,7 +319,10 @@ namespace TwitchDotNet.Clients {
         /// Https://dev.twitch.tv/docs/v5/reference/users/#get-user
         /// </summary>
         /// <returns></returns>
-        public dynamic GetUser() { return null; }
+        public dynamic GetUser() {
+            var request = httpHelperClient.CreateHttpRequest($"user", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets a list of the emojis and emoticons that the specified user can use in chat.
@@ -240,7 +330,10 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_userId">User Id</param>
         /// <returns></returns>
-        public dynamic GetUserEmotes(string _userId) { return null; }
+        public dynamic GetUserEmotes(string _userId) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/emotes", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Checks if a specified user is subscribed to a specified channel.
@@ -249,7 +342,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_channelId">Channel Id to check</param>
         /// <returns></returns>
-        public dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId) { return null; }
+        public dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/subscriptions/{_channelId}", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Adds a specified user to the followers of a specified channel.
@@ -259,7 +355,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_targetChannelId">Target Channel to follow</param>
         /// <param name="_enableNotifications">If true, the user gets email or push notifications (depending on his notification settings) when the channel goes live, false otherwise</param>
         /// <returns></returns>
-        public dynamic FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false) { return null; }
+        public dynamic FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Put);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Deletes a specified user from the followers of a specified channel.
@@ -268,7 +367,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_targetChannelId">Target Channel to unfollow</param>
         /// <returns></returns>
-        public dynamic UnfollowChannel(string _userId, string _targetChannelId) { return null; }
+        public dynamic UnfollowChannel(string _userId, string _targetChannelId) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Gets a user’s block list.
@@ -277,7 +379,11 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
-        public dynamic GetUserBlockList(string _userId, Pagination _pagination) { return null; }
+        public dynamic GetUserBlockList(string _userId, Pagination _pagination) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Blocks the target user.
@@ -286,7 +392,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_targetUserId">Target User Id to block</param>
         /// <returns></returns>
-        public dynamic BlockUser(string _userId, string _targetUserId) { return null; }
+        public dynamic BlockUser(string _userId, string _targetUserId) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks/{_targetUserId}", HttpMethod.Put);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         /// <summary>
         /// Unblocks the target user.
@@ -295,7 +404,10 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <param name="_targetUserId">Target User Id to unblock</param>
         /// <returns></returns>
-        public dynamic UnblockUser(string _userId, string _targetUserId) { return null; }
+        public dynamic UnblockUser(string _userId, string _targetUserId) {
+            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks/{_targetUserId}", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         #endregion
 
@@ -308,7 +420,12 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <param name="_broadcastType">Broadcast type <see cref="Enums.BroadcastType"/></param>
         /// <returns></returns>
-        public dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight) { return null; }
+        public dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight) {
+            var request = httpHelperClient.CreateHttpRequest($"videos/followed", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            httpHelperClient.AddQueryString(request, "broadcast_type", _broadcastType.ToString());
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
 
         #endregion
     }
