@@ -24,7 +24,7 @@ namespace TwitchDotNet.Tests {
             string scopes = resourceLoader.GetString("AUTH_SCOPES");
             string oauthToken = resourceLoader.GetString("OAUTH_TOKEN");
 
-            // Init unauthenticated client
+            // Init  client
             // Manual OAuth Token as WebAuthenticationBroker for UWP doesn't work in a UnitTest
             twitchClientAuthenticated = new TwitchClientAuthenticated(baseUrl, clientId, oauthToken);
         }

@@ -10,19 +10,19 @@ using System.Net;
 namespace TwitchDotNet.Clients {
 
     /// <summary>
-    /// Unauthenticated TwitchClient
-    /// Provides an interface for an unauthenticated session to retrieve data from Twitch API's (where authentication is not required)
+    ///  TwitchClient
+    /// Provides an interface for an  session to retrieve data from Twitch API's (where authentication is not required)
     /// </summary>
-    public class TwitchClientUnauthenticated : ITwitchClientUnauthenticated {
+    public class TwitchClient : ITwitchClient {
 
         protected readonly HttpHelper httpHelperClient;
 
         /// <summary>
-        /// Initialise HttpClient for unauthenticated requests
+        /// Initialise HttpClient for  requests
         /// </summary>
         /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>
-        public TwitchClientUnauthenticated(string _baseUrl, string _clientId) {
+        public TwitchClient(string _baseUrl, string _clientId) {
             httpHelperClient = new HttpHelper(_baseUrl, _clientId);
         }
 

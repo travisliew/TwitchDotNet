@@ -9,9 +9,9 @@ using TwitchDotNet.Helpers;
 namespace TwitchDotNet.Interfaces {
 
     /// <summary>
-    /// TwitchClient Interface for Unauthenticated requests to Twitch API
+    /// TwitchClient Interface for  requests to Twitch API
     /// </summary>
-    internal interface ITwitchClientUnauthenticated {
+    public interface ITwitchClient {
 
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
         

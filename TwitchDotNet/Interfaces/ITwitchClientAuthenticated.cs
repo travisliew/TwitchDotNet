@@ -11,7 +11,7 @@ namespace TwitchDotNet.Interfaces {
     /// <summary>
     /// TwitchClient Interface for Authenticated requests to Twitch API
     /// </summary>
-    internal interface ITwitchClientAuthenticated {
+    public interface ITwitchClientAuthenticated {
 
         #region General
 

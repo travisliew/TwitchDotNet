@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients\TwitchClientAuthenticated.cs" />
-    <Compile Include="Clients\TwitchClientUnauthenticated.cs" />
+    <Compile Include="Clients\TwitchClient.cs" />
     <Compile Include="Enums\BroadcastType.cs" />
     <Compile Include="Enums\Period.cs" />
     <Compile Include="Enums\SortBy.cs" />
@@ -120,7 +120,7 @@
     <Compile Include="Helpers\CursorPagination.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Interfaces\ITwitchClientAuthenticated.cs" />
-    <Compile Include="Interfaces\ITwitchClientUnauthenticated.cs" />
+    <Compile Include="Interfaces\ITwitchClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\TwitchDotNet.rd.xml" />
   </ItemGroup>

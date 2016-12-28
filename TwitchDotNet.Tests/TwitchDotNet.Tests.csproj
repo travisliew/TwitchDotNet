@@ -95,7 +95,7 @@
     <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\TwitchClientUnauthenticatedTests.cs" />
+    <Compile Include="Clients\TwitchClientTests.cs" />
     <Compile Include="Clients\TwitchClientAuthenticatedTests.cs" />
     <Compile Include="Helpers\PaginationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
