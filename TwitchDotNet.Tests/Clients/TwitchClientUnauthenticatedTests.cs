@@ -176,9 +176,9 @@ namespace TwitchDotNet.Tests
             string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.CheckUserFollowsByChannel(userId, channelId));
             
-            // Not following, expecting no result
+            // Not following, still expecting result (but 404 http code with message of "X is not following Y")
             channelId = "129454141";
-            Assert.IsNull(twitchClientUnauthenticated.CheckUserFollowsByChannel(userId, channelId));
+            Assert.IsNotNull(twitchClientUnauthenticated.CheckUserFollowsByChannel(userId, channelId));
         }
 
         #endregion

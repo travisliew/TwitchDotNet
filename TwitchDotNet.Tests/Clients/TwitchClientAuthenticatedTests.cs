@@ -62,7 +62,7 @@ namespace TwitchDotNet.Tests {
             Assert.IsNotNull(response);
 
             // Delete post
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPost(channelId, response.id));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPost(channelId, response.post.id.ToString()));
         }
 
         // Test_CreateReactionToChannelFeedPost
@@ -100,7 +100,7 @@ namespace TwitchDotNet.Tests {
             Assert.IsNotNull(response);
 
             // Delete post comment
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPostComment(channelId, postId, response.id));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPostComment(channelId, postId, response.id.ToString()));
         }
 
         // Test_CreateReactionToChannelFeedPostComment
@@ -140,25 +140,26 @@ namespace TwitchDotNet.Tests {
 
         [TestMethod]
         public void Test_GetChannelEditors() {
-            string channelId = "28036688"; // trick2g
+            string channelId = "32220409"; // travy92
             Assert.IsNotNull(twitchClientAuthenticated.GetChannelEditors(channelId));
         }
 
         [TestMethod]
         public void Test_GetChannelSubscribers() {
-            string channelId = "28036688"; // trick2g
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelSubscribers(channelId, new Pagination()));
+            // Expecting null as I don't have any subscribers
+            string channelId = "28036688"; // travy92
+            Assert.IsNull(twitchClientAuthenticated.GetChannelSubscribers(channelId, new Pagination()));
         }
 
         [TestMethod]
         public void Test_CheckChannelSubscriptionByUser() {
-            string channelId = "28036688"; // trick2g
-            string targetUserId = "29201680"; // xanbot
+            string channelId = "32220409"; // travy92
+            string targetUserId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientAuthenticated.CheckChannelSubscriptionByUser(channelId, targetUserId));
         }
 
         [TestMethod]
-        public void Test_StartChannelCommercial(string _channelId) {
+        public void Test_StartChannelCommercial() {
             string channelId = "32220409"; // travy92
             Assert.IsNotNull(twitchClientAuthenticated.ResetChannelStreamKey(channelId));
         }

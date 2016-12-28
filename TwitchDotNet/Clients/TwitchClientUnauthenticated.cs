@@ -5,6 +5,7 @@ using TwitchDotNet.Interfaces;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace TwitchDotNet.Clients {
 
@@ -327,7 +328,7 @@ namespace TwitchDotNet.Clients {
         /// <returns></returns>
         public dynamic CheckUserFollowsByChannel(string _userId, string _channelId) {
             var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_channelId}", HttpMethod.Get);
-            return httpHelperClient.ExecuteRequest(request).Result;
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | HttpStatusCode.NotFound).Result;
         }
 
         #endregion

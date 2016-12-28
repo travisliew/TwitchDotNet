@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
+using System.Net;
 
 namespace TwitchDotNet.Clients {
 
@@ -267,7 +268,8 @@ namespace TwitchDotNet.Clients {
         /// <returns></returns>
         public dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId) {
             var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/subscriptions/{_targetUserId}", HttpMethod.Get);
-            return httpHelperClient.ExecuteRequest(request).Result;
+            // 422 Unprocessable Entity (no subscription program), 404 Not Found when user is not a subscriber of the channel
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | (HttpStatusCode)422 | HttpStatusCode.NotFound).Result;
         }
 
         /// <summary>
@@ -344,7 +346,8 @@ namespace TwitchDotNet.Clients {
         /// <returns></returns>
         public dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId) {
             var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/subscriptions/{_channelId}", HttpMethod.Get);
-            return httpHelperClient.ExecuteRequest(request).Result;
+            // 422 Unprocessable Entity (no subscription program), 404 Not Found when user is not a subscriber of the channel
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | (HttpStatusCode)422 | HttpStatusCode.NotFound).Result;
         }
 
         /// <summary>
@@ -369,7 +372,7 @@ namespace TwitchDotNet.Clients {
         /// <returns></returns>
         public dynamic UnfollowChannel(string _userId, string _targetChannelId) {
             var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Delete);
-            return httpHelperClient.ExecuteRequest(request).Result;
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.NoContent).Result;
         }
 
         /// <summary>
@@ -406,7 +409,7 @@ namespace TwitchDotNet.Clients {
         /// <returns></returns>
         public dynamic UnblockUser(string _userId, string _targetUserId) {
             var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks/{_targetUserId}", HttpMethod.Delete);
-            return httpHelperClient.ExecuteRequest(request).Result;
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.NoContent).Result;
         }
 
         #endregion

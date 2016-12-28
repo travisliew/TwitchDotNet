@@ -46,17 +46,20 @@ namespace TwitchDotNet.Helpers {
         /// Send a HttpRequestMessage
         /// </summary>
         /// <param name="_request">HttpRequestMessage to send</param>
+        /// <param name="_successCodes">HttpStatusCodes that indicate success</param>
         /// <returns>String representing returned content</returns>
-        public async Task<dynamic> ExecuteRequest(HttpRequestMessage _request) {
+        public async Task<dynamic> ExecuteRequest(HttpRequestMessage _request, HttpStatusCode _successCodes = HttpStatusCode.OK) {
             var response = await httpClient.SendAsync(_request).ConfigureAwait(false);
             try {
-                // Ensure successful response
-                response.EnsureSuccessStatusCode();
-                
-                // Read response content as byte array and decode as UTF-8
-                var response_buffer = await response.Content.ReadAsByteArrayAsync();
-                var response_string = Encoding.UTF8.GetString(response_buffer, 0, response_buffer.Length);
-                return JsonConvert.DeserializeObject(response_string);
+                // Ensure successful response (indicated by _successCodes)
+                 if ((_successCodes & response.StatusCode) == response.StatusCode) {
+                    // Read response content as byte array and decode as UTF-8
+                    var response_buffer = await response.Content.ReadAsByteArrayAsync();
+                    var response_string = Encoding.UTF8.GetString(response_buffer, 0, response_buffer.Length);
+                    return JsonConvert.DeserializeObject(response_string) ?? string.Empty; // Return empty string if get here, as it was expected (see: _successCodes)
+                } else {
+                    throw new Exception($"HttpRequest did not indicate success. Error Code: {response.StatusCode}");
+                }
             } catch (Exception ex) {
                 Debug.WriteLine($"An error occurred while sending off a HttpRequest.\n\n{ex.ToString()}");
             }
