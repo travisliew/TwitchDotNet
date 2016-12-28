@@ -31,25 +31,25 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetChannel() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetChannel(channelId));
         }
 
         [TestMethod]
         public void Test_GetChannelFollowers() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetChannelFollowers(channelId, new Pagination()));
         }
 
         [TestMethod]
         public void Test_GetChannelTeams() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetChannelTeams(channelId));
         }
 
         [TestMethod]
         public void Test_GetChannelVideos() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetChannelVideos(channelId, new Pagination()));
         }
 
@@ -59,7 +59,7 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetChatBadgesByChannel() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetChatBadgesByChannel(channelId));
         }
 
@@ -124,7 +124,7 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetStream() {
-            string channelId = "28036688";
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetStream(channelId));
         }
 
@@ -159,13 +159,13 @@ namespace TwitchDotNet.Tests
 
         [TestMethod]
         public void Test_GetUser() {
-            string userId = "28036688";
+            string userId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetUser(userId));
         }
 
         [TestMethod]
         public void Test_GetUserFollowedChannels() {
-            string userId = "28036688";
+            string userId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.GetUserFollowedChannels(userId, new Pagination()));
         }
 
@@ -173,8 +173,8 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void Test_CheckUserFollowsByChannel() {
             // Am following, expecting result
-            string userId = "32220409";
-            string channelId = "28036688";
+            string userId = "32220409"; // travy92
+            string channelId = "28036688"; // trick2g
             Assert.IsNotNull(twitchClientUnauthenticated.CheckUserFollowsByChannel(userId, channelId));
             
             // Not following, expecting no result
