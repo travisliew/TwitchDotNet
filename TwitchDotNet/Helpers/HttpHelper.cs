@@ -47,7 +47,7 @@ namespace TwitchDotNet.Helpers {
         /// </summary>
         /// <param name="_request">HttpRequestMessage to send</param>
         /// <param name="_successCodes">HttpStatusCodes that indicate success</param>
-        /// <returns>String representing returned content</returns>
+        /// <returns>Object representing returned content</returns>
         public async Task<dynamic> ExecuteRequest(HttpRequestMessage _request, HttpStatusCode _successCodes = HttpStatusCode.OK) {
             var response = await httpClient.SendAsync(_request).ConfigureAwait(false);
             try {

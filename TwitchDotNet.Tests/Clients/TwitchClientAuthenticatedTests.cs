@@ -6,6 +6,8 @@ using TwitchDotNet.Enums;
 using Windows.ApplicationModel.Resources;
 using TwitchDotNet.Clients;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace TwitchDotNet.Tests {
     [TestClass]
@@ -29,11 +31,20 @@ namespace TwitchDotNet.Tests {
             twitchClientAuthenticated = new TwitchClientAuthenticated(baseUrl, clientId, oauthToken);
         }
 
+        #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api
+
         [TestMethod]
         public void Test_GetIdByName() {
             string name = "trick2g";
             Assert.IsNotNull(twitchClientAuthenticated.GetIdByName(name));
         }
+
+        [TestMethod]
+        public void Test_GetRoot() {
+            Assert.IsNotNull(twitchClientAuthenticated.GetRoot());
+        }
+
+        #endregion
 
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 

@@ -28,7 +28,7 @@ namespace TwitchDotNet.Helpers {
         public static async Task<string> Authenticate(string _baseUrl, string _clientId, string _redirectUri, string _scopes) {
             // Create request (use httpHelper to build query string)
             var httpHelper = new HttpHelper(_baseUrl, _clientId);
-            var request = httpHelper.CreateHttpRequest("oauth2/authenticate", HttpMethod.Get);
+            var request = httpHelper.CreateHttpRequest("kraken/oauth2/authenticate", HttpMethod.Get);
             httpHelper.AddQueryString(request, "client_id", _clientId); // Add client_id manually so it is part of the query string (required for WAB startUri below)
             httpHelper.AddQueryString(request, "action", "authorize");
             httpHelper.AddQueryString(request, "response_type", "token");

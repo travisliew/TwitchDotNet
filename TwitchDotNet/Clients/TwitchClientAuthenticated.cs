@@ -28,11 +28,27 @@ namespace TwitchDotNet.Clients {
             httpHelperClient.AddHttpClientHeader("Authorization", $"OAuth {_oauthToken}");
         }
 
-        #region General
+        #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/
 
-        public dynamic GetIdByName(string _name) {
+        /// <summary>
+        /// Get Twitch Id by Twitch Username.
+        /// https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api#translating-from-user-names-to-user-ids
+        /// </summary>
+        /// <param name="_name">Twitch username</param>
+        /// <returns></returns>
+        public dynamic GetIdByName(string _username) {
             var request = httpHelperClient.CreateHttpRequest($"kraken/users", HttpMethod.Get);
-            httpHelperClient.AddQueryString(request, "login", _name);
+            httpHelperClient.AddQueryString(request, "login", _username);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
+
+        /// <summary>
+        /// Check token status using Root Url.
+        /// https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api#root-url
+        /// </summary>
+        /// <returns>Token status</returns>
+        public dynamic GetRoot() {
+            var request = httpHelperClient.CreateHttpRequest($"kraken", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 

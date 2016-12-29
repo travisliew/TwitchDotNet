@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using TwitchDotNet.Enums;
 using TwitchDotNet.Clients;
 using Windows.ApplicationModel.Resources;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace TwitchDotNet.Tests
 {
