@@ -35,7 +35,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic GetChannel(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -48,7 +48,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_direction">Sort direction <see cref="Enums.SortDirection"/></param>
         /// <returns></returns>
         public dynamic GetChannelFollowers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.desc) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/follows", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/follows", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "direction", _direction.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -61,7 +61,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic GetChannelTeams(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/teams", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/teams", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -76,7 +76,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_sort">Sort by <see cref="Enums.SortBy"/></param>
         /// <returns></returns>
         public dynamic GetChannelVideos(string _channelId, Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _languages = default(List<string>), SortBy _sort = SortBy.time) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/videos", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/videos", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "broadcast_type", _broadcastType.ToString());
             if (_languages != default(List<string>) && _languages.Count > 0) { httpHelperClient.AddQueryString(request, "language", string.Join(",", _languages)); }
@@ -95,7 +95,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic GetChatBadgesByChannel(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"chat/{_channelId}/badges", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/chat/{_channelId}/badges", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -106,7 +106,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_emoteSets">Emote set</param>
         /// <returns></returns>
         public dynamic GetChatBadgesBySet(List<string> _emoteSets = default(List<string>)) {
-            var request = httpHelperClient.CreateHttpRequest($"games/top", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/games/top", HttpMethod.Get);
             if (_emoteSets != default(List<string>) && _emoteSets.Count > 0) { httpHelperClient.AddQueryString(request, "emotesets", string.Join(",", _emoteSets)); }
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -117,7 +117,7 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <returns></returns>
         public dynamic GetEmoticons() {
-            var request = httpHelperClient.CreateHttpRequest($"chat/emoticons", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/chat/emoticons", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -132,7 +132,20 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
         public dynamic GetTopGames(Pagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"games/top", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/games/top", HttpMethod.Get);
+            httpHelperClient.AddQueryString(request, _pagination);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
+
+        /// <summary>
+        /// **LEGACY / UNSUPPORTED API**
+        /// Get followed games by user.
+        /// </summary>
+        /// <param name="_username">Username to retrieve followed games for</param>
+        /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
+        /// <returns></returns>
+        public dynamic GetFollowedGames(string _username, Pagination _pagination) {
+            var request = httpHelperClient.CreateHttpRequest($"api/users/{_username}/follows/games", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -147,7 +160,7 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <returns></returns>
         public dynamic GetIngests() {
-            var request = httpHelperClient.CreateHttpRequest($"ingests", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/ingests", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -163,7 +176,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
         public dynamic SearchChannels(string _query, Pagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"search/channels", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/search/channels", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "query", _query);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -178,7 +191,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_hls">If true, return only HLS streams, false, only non-HLS streams</param>
         /// <returns></returns>
         public dynamic SearchStreams(string _query, Pagination _pagination, bool _hls = true) {
-            var request = httpHelperClient.CreateHttpRequest($"search/streams", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/search/streams", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "query", _query);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "hls", _hls.ToString());
@@ -193,7 +206,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_live">If true, return only games that are live on at least one channel, false, return all</param>
         /// <returns></returns>
         public dynamic SearchGames(string _query, bool _live = false) {
-            var request = httpHelperClient.CreateHttpRequest($"search/games", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/search/games", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "query", _query);
             httpHelperClient.AddQueryString(request, "live", _live.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -214,7 +227,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_language">Restrict VODs to specific language(s)</param>
         /// <returns></returns>
         public dynamic GetStreams(Pagination _pagination, string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>)) {
-            var request = httpHelperClient.CreateHttpRequest($"streams", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/streams", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             if (!string.IsNullOrEmpty(_game)) { httpHelperClient.AddQueryString(request, "game", _game); }
             if (_channels != default(List<string>) && _channels.Count > 0) { httpHelperClient.AddQueryString(request, "channel", string.Join(",", _channels)); }
@@ -231,7 +244,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_streamType">Stream type <see cref="Enums.StreamType"/></param>
         /// <returns></returns>
         public dynamic GetStream(string _channelId, StreamType _streamType = StreamType.live) {
-            var request = httpHelperClient.CreateHttpRequest($"streams/{_channelId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/streams/{_channelId}", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "stream_type", _streamType.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -243,7 +256,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
         public dynamic GetFeaturedStreams(Pagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"streams/featured", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/streams/featured", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -255,7 +268,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_game">Restrict summary to specific game</param>
         /// <returns></returns>
         public dynamic GetStreamsSummary(string _game = default(string)) {
-            var request = httpHelperClient.CreateHttpRequest($"streams/summary", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/streams/summary", HttpMethod.Get);
             if (!string.IsNullOrEmpty(_game)) { httpHelperClient.AddQueryString(request, "game", _game); }
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -271,7 +284,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
         public dynamic GetTeams(Pagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"teams", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/teams", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -283,7 +296,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_teamName">Team name</param>
         /// <returns></returns>
         public dynamic GetTeam(string _teamName) {
-            var request = httpHelperClient.CreateHttpRequest($"teams/{_teamName}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/teams/{_teamName}", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -298,7 +311,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <returns></returns>
         public dynamic GetUser(string _userId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -312,7 +325,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_sortKey">Sort key <see cref="Enums.SortKey"/></param>
         /// <returns></returns>
         public dynamic GetUserFollowedChannels(string _userId, Pagination _pagination, SortDirection _direction = SortDirection.desc, SortKey _sortKey = SortKey.created_at) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/follows/channels", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "direction", _direction.ToString());
             httpHelperClient.AddQueryString(request, "sortby", _sortKey.ToString());
@@ -327,7 +340,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id to check</param>
         /// <returns></returns>
         public dynamic CheckUserFollowsByChannel(string _userId, string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_channelId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/follows/channels/{_channelId}", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | HttpStatusCode.NotFound).Result;
         }
 
@@ -342,7 +355,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_videoId">Video Id</param>
         /// <returns></returns>
         public dynamic GetVideo(string _videoId) {
-            var request = httpHelperClient.CreateHttpRequest($"videos/{_videoId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/videos/{_videoId}", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -356,7 +369,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_broadcastType">Broadcast type <see cref="Enums.BroadcastType"/></param>
         /// <returns></returns>
         public dynamic GetTopVideos(Pagination _pagination, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight) {
-            var request = httpHelperClient.CreateHttpRequest($"videos/top", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/videos/top", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             if (!string.IsNullOrEmpty(_game)) { httpHelperClient.AddQueryString(request, "game", _game); }
             httpHelperClient.AddQueryString(request, "period", _period.ToString());

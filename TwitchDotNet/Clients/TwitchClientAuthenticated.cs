@@ -31,7 +31,7 @@ namespace TwitchDotNet.Clients {
         #region General
 
         public dynamic GetIdByName(string _name) {
-            var request = httpHelperClient.CreateHttpRequest($"users", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "login", _name);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -49,7 +49,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_comments">Number of comments to retrieve</param>
         /// <returns></returns>
         public dynamic GetChannelFeedPosts(string _channelId, CursorPagination _pagination, long _comments = 5) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "comments", _comments.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -64,7 +64,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_comments">Number of comments to retrieve</param>
         /// <returns></returns>
         public dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, "comments", _comments.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -78,7 +78,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_share">If true, share a link to the post on the channel's Twitter feed (if connected)</param>
         /// <returns></returns>
         public dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts", HttpMethod.Post);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts", HttpMethod.Post);
             httpHelperClient.AddQueryString(request, "content", _content);
             httpHelperClient.AddQueryString(request, "share", _share.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -92,7 +92,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_postId">Post Id to delete</param>
         /// <returns></returns>
         public dynamic DeleteChannelFeedPost(string _channelId, string _postId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}", HttpMethod.Delete);
             return httpHelperClient.ExecuteRequest(request).Result; ; }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_emoteId">Reaction emote to create</param>
         /// <returns></returns>
         public dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Post);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Post);
             httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -118,7 +118,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_emoteId">Reaction emote to delete</param>
         /// <returns></returns>
         public dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/reactions", HttpMethod.Delete);
             httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -132,7 +132,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.CursorPagination"/></param>
         /// <returns></returns>
         public dynamic GetChannelFeedPostComments(string _channelId, string _postId, CursorPagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -146,7 +146,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_content">Content of the comment</param>
         /// <returns></returns>
         public dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Post);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/comments", HttpMethod.Post);
             httpHelperClient.AddQueryString(request, "content", _content);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -160,7 +160,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_commentId">Comment Id to delete</param>
         /// <returns></returns>
         public dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/comments/{_commentId}", HttpMethod.Delete);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -174,7 +174,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_emoteId">Reaction emote to create</param>
         /// <returns></returns>
         public dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Post);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Post);
             httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -189,7 +189,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_emoteId">Reaction emote to delete</param>
         /// <returns></returns>
         public dynamic DeleteReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId) {
-            var request = httpHelperClient.CreateHttpRequest($"feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/feed/{_channelId}/posts/{_postId}/comments/{_commentId}/reactions", HttpMethod.Delete);
             httpHelperClient.AddQueryString(request, "emote_id", _emoteId);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -204,7 +204,7 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <returns></returns>
         public dynamic GetChannel() {
-            var request = httpHelperClient.CreateHttpRequest($"channel", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channel", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -219,7 +219,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelFeedEnabled">If true, the channel's feed is turned on, false otherwise</param>
         /// <returns></returns>
         public dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}", HttpMethod.Put);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}", HttpMethod.Put);
 
             // Only add as property if it is explicitly set, otherwise we will be overriding when not intending to
             var properties = new JObject();
@@ -240,7 +240,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic GetChannelEditors(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/editors", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/editors", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -253,7 +253,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_direction">Sort direction <see cref="Enums.SortDirection"/></param>
         /// <returns></returns>
         public dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/subscriptions", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/subscriptions", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "direction", _direction.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -267,7 +267,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_targetUserId">Target User Id to check</param>
         /// <returns></returns>
         public dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/subscriptions/{_targetUserId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/subscriptions/{_targetUserId}", HttpMethod.Get);
             // 422 Unprocessable Entity (no subscription program), 404 Not Found when user is not a subscriber of the channel
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | (HttpStatusCode)422 | HttpStatusCode.NotFound).Result;
         }
@@ -279,7 +279,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic StartChannelCommercial(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"channel/{_channelId}/commercial", HttpMethod.Post);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channel/{_channelId}/commercial", HttpMethod.Post);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -290,7 +290,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id</param>
         /// <returns></returns>
         public dynamic ResetChannelStreamKey(string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"channels/{_channelId}/stream_key", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/channels/{_channelId}/stream_key", HttpMethod.Delete);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -306,7 +306,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_streamType">Stream type <see cref="Enums.StreamType"/></param>
         /// <returns></returns>
         public dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live) {
-            var request = httpHelperClient.CreateHttpRequest($"streams/followed", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/streams/followed", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "stream_type", _streamType.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;
@@ -322,7 +322,7 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <returns></returns>
         public dynamic GetUser() {
-            var request = httpHelperClient.CreateHttpRequest($"user", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/user", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -333,7 +333,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_userId">User Id</param>
         /// <returns></returns>
         public dynamic GetUserEmotes(string _userId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/emotes", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/emotes", HttpMethod.Get);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -345,7 +345,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_channelId">Channel Id to check</param>
         /// <returns></returns>
         public dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/subscriptions/{_channelId}", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/subscriptions/{_channelId}", HttpMethod.Get);
             // 422 Unprocessable Entity (no subscription program), 404 Not Found when user is not a subscriber of the channel
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | (HttpStatusCode)422 | HttpStatusCode.NotFound).Result;
         }
@@ -359,7 +359,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_enableNotifications">If true, the user gets email or push notifications (depending on his notification settings) when the channel goes live, false otherwise</param>
         /// <returns></returns>
         public dynamic FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Put);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Put);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -371,7 +371,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_targetChannelId">Target Channel to unfollow</param>
         /// <returns></returns>
         public dynamic UnfollowChannel(string _userId, string _targetChannelId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/follows/channels/{_targetChannelId}", HttpMethod.Delete);
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.NoContent).Result;
         }
 
@@ -383,7 +383,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_pagination">Pagination info <see cref="Helpers.Pagination"/></param>
         /// <returns></returns>
         public dynamic GetUserBlockList(string _userId, Pagination _pagination) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/blocks", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
@@ -396,7 +396,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_targetUserId">Target User Id to block</param>
         /// <returns></returns>
         public dynamic BlockUser(string _userId, string _targetUserId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks/{_targetUserId}", HttpMethod.Put);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/blocks/{_targetUserId}", HttpMethod.Put);
             return httpHelperClient.ExecuteRequest(request).Result;
         }
 
@@ -408,7 +408,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_targetUserId">Target User Id to unblock</param>
         /// <returns></returns>
         public dynamic UnblockUser(string _userId, string _targetUserId) {
-            var request = httpHelperClient.CreateHttpRequest($"users/{_userId}/blocks/{_targetUserId}", HttpMethod.Delete);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/users/{_userId}/blocks/{_targetUserId}", HttpMethod.Delete);
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.NoContent).Result;
         }
 
@@ -424,7 +424,7 @@ namespace TwitchDotNet.Clients {
         /// <param name="_broadcastType">Broadcast type <see cref="Enums.BroadcastType"/></param>
         /// <returns></returns>
         public dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight) {
-            var request = httpHelperClient.CreateHttpRequest($"videos/followed", HttpMethod.Get);
+            var request = httpHelperClient.CreateHttpRequest($"kraken/videos/followed", HttpMethod.Get);
             httpHelperClient.AddQueryString(request, _pagination);
             httpHelperClient.AddQueryString(request, "broadcast_type", _broadcastType.ToString());
             return httpHelperClient.ExecuteRequest(request).Result;

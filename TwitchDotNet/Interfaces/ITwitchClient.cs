@@ -33,6 +33,7 @@ namespace TwitchDotNet.Interfaces {
         #region Games - Https://dev.twitch.tv/docs/v5/reference/games/
 
         dynamic GetTopGames(Pagination _pagination);
+        dynamic GetFollowedGames(string _username, Pagination _pagination);
 
         #endregion
 

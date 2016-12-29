@@ -81,6 +81,12 @@ namespace TwitchDotNet.Tests
             Assert.IsNotNull(twitchClient.GetTopGames(new Pagination()));
         }
 
+        [TestMethod]
+        public void Test_GetFollowedGames() {
+            string username = "trick2g";
+            Assert.IsNotNull(twitchClient.GetFollowedGames(username, new Pagination()));
+        }
+
         #endregion
 
         #region Ingests - Https://dev.twitch.tv/docs/v5/reference/ingests/
