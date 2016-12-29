@@ -296,6 +296,32 @@ namespace TwitchDotNet.Clients {
 
         #endregion
 
+        #region Game - Unofficial https://discuss.dev.twitch.tv/t/game-following-requests/2186
+
+        /// <summary>
+        /// Adds a specified user to the followers of a specified game.
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_game"></param>
+        /// <returns></returns>
+        public dynamic FollowGame(string _username, string _game) {
+            var request = httpHelperClient.CreateHttpRequest($"api/users/{_username}/follows/games/{_game}", HttpMethod.Put);
+            return httpHelperClient.ExecuteRequest(request).Result;
+        }
+
+        /// <summary>
+        /// Deletes a specified user from the followers of a specified game.
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_game"></param>
+        /// <returns></returns>
+        public dynamic UnfollowGame(string _username, string _game) {
+            var request = httpHelperClient.CreateHttpRequest($"api/users/{_username}/follows/games/{_game}", HttpMethod.Delete);
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.NoContent).Result;
+        }
+
+        #endregion
+
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
         /// <summary>

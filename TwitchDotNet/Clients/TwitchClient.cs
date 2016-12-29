@@ -18,7 +18,7 @@ namespace TwitchDotNet.Clients {
         protected readonly HttpHelper httpHelperClient;
 
         /// <summary>
-        /// Initialise HttpClient for  requests
+        /// Initialise HttpClient for requests
         /// </summary>
         /// <param name="_baseUrl">Base Twitch API url</param>
         /// <param name="_clientId">Client Id header</param>
@@ -138,7 +138,7 @@ namespace TwitchDotNet.Clients {
         }
 
         /// <summary>
-        /// **LEGACY / UNSUPPORTED API**
+        /// **UNOFFOCIAL API** https://discuss.dev.twitch.tv/t/game-following-requests/2186
         /// Get followed games by user.
         /// </summary>
         /// <param name="_username">Username to retrieve followed games for</param>

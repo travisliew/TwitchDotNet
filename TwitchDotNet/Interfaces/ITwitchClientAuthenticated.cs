@@ -47,6 +47,13 @@ namespace TwitchDotNet.Interfaces {
 
         #endregion
 
+        #region Game - Unsupported https://discuss.dev.twitch.tv/t/game-following-requests/2186
+
+        dynamic FollowGame(string _username, string _game);
+        dynamic UnfollowGame(string _username, string _game);
+
+        #endregion
+
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
         dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live);

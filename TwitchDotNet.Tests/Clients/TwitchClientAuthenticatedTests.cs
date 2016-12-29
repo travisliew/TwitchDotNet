@@ -172,6 +172,24 @@ namespace TwitchDotNet.Tests {
 
         #endregion
 
+        #region Game - Unofficial https://discuss.dev.twitch.tv/t/game-following-requests/2186
+
+        // Test_FollowGame
+        // Test_UnfollowGame
+        [TestMethod]
+        public void Test_FollowAndUnfollowGame() {
+            string username = "travy92";
+            string game = "Poker";
+
+            // Follow game
+            Assert.IsNotNull(twitchClientAuthenticated.FollowGame(username, game));
+
+            // Unfollow game
+            Assert.IsNotNull(twitchClientAuthenticated.UnfollowGame(username, game));
+        }
+
+        #endregion
+
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
         [TestMethod]
@@ -233,7 +251,6 @@ namespace TwitchDotNet.Tests {
 
             // Unblock user
             Assert.IsNotNull(twitchClientAuthenticated.UnblockUser(userId, targetUserId));
-
         }
 
         #endregion
