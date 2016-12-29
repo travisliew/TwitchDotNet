@@ -72,6 +72,8 @@ namespace TwitchDotNet.Interfaces {
         dynamic GetUser(string _userId);
         dynamic GetUserFollowedChannels(string _userId, Pagination _pagination, SortDirection _direction = SortDirection.desc, SortKey _sortBy = SortKey.created_at);
         dynamic CheckUserFollowsByChannel(string _userId, string _channelId);
+        // Unofficial
+        dynamic CheckUserFollowsByGame(string _username, string _game);
 
         #endregion
 

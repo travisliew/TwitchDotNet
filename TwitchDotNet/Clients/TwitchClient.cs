@@ -344,6 +344,18 @@ namespace TwitchDotNet.Clients {
             return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | HttpStatusCode.NotFound).Result;
         }
 
+        /// <summary>
+        /// ** Unofficial API **
+        /// Checks if a specified user follows a specified game. 
+        /// </summary>
+        /// <param name="_username">Username</param>
+        /// <param name="_game">Game to check</param>
+        /// <returns></returns>
+        public dynamic CheckUserFollowsByGame(string _username, string _game) {
+            var request = httpHelperClient.CreateHttpRequest($"api/users/{_username}/follows/games/{_game}", HttpMethod.Get);
+            return httpHelperClient.ExecuteRequest(request, HttpStatusCode.OK | HttpStatusCode.NotFound).Result;
+        }
+        
         #endregion
 
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/

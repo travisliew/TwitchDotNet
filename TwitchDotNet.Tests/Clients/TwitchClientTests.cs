@@ -187,6 +187,18 @@ namespace TwitchDotNet.Tests
             Assert.IsNotNull(twitchClient.CheckUserFollowsByChannel(userId, channelId));
         }
 
+        [TestMethod]
+        public void Test_CheckUserFollowsByGame() {
+            // Am following, expecting result
+            string username = "travy92";
+            string game = "League of Legends";
+            Assert.IsNotNull(twitchClient.CheckUserFollowsByGame(username, game));
+
+            // Not following, still expecting result (but 404 http code with message of "X is not following Y")
+            game = "Poker";
+            Assert.IsNotNull(twitchClient.CheckUserFollowsByGame(username, game));
+        }
+
         #endregion
 
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
