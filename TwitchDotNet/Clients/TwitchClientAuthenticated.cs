@@ -32,18 +32,6 @@ namespace TwitchDotNet.Clients {
         #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/
 
         /// <summary>
-        /// Get Twitch Id by Twitch Username.
-        /// https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api#translating-from-user-names-to-user-ids
-        /// </summary>
-        /// <param name="_name">Twitch username</param>
-        /// <returns></returns>
-        public async Task<dynamic> GetIdByName(string _username) {
-            var request = httpHelperClient.CreateHttpRequest($"kraken/users", HttpMethod.Get);
-            httpHelperClient.AddQueryString(request, "login", _username);
-            return await httpHelperClient.ExecuteRequest(request);
-        }
-
-        /// <summary>
         /// Check token status using Root Url.
         /// https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api#root-url
         /// </summary>

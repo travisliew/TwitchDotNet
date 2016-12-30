@@ -14,8 +14,7 @@ namespace TwitchDotNet.Interfaces {
     public interface ITwitchClientAuthenticated {
 
         #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api
-
-        Task<dynamic> GetIdByName(string _name);
+        
         Task<dynamic> GetRoot();
 
         #endregion

@@ -28,6 +28,16 @@ namespace TwitchDotNet.Tests
             twitchClient = new TwitchClient(baseUrl, clientId);
         }
 
+        #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api
+
+        [TestMethod]
+        public void Test_GetIdByName() {
+            string name = "trick2g";
+            Assert.IsNotNull(twitchClient.GetIdByName(name).Result);
+        }
+
+        #endregion
+
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
 
         [TestMethod]

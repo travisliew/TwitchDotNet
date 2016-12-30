@@ -13,8 +13,14 @@ namespace TwitchDotNet.Interfaces {
     /// </summary>
     public interface ITwitchClient {
 
+        #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/
+
+        Task<dynamic> GetIdByName(string _username);
+
+        #endregion
+
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
-        
+
         Task<dynamic> GetChannel(string _channelId);
         Task<dynamic> GetChannelFollowers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.desc);
         Task<dynamic> GetChannelTeams(string _channelId);
