@@ -36,12 +36,12 @@ namespace TwitchDotNet.Tests {
         [TestMethod]
         public void Test_GetIdByName() {
             string name = "trick2g";
-            Assert.IsNotNull(twitchClientAuthenticated.GetIdByName(name));
+            Assert.IsNotNull(twitchClientAuthenticated.GetIdByName(name).Result);
         }
 
         [TestMethod]
         public void Test_GetRoot() {
-            Assert.IsNotNull(twitchClientAuthenticated.GetRoot());
+            Assert.IsNotNull(twitchClientAuthenticated.GetRoot().Result);
         }
 
         #endregion
@@ -51,14 +51,14 @@ namespace TwitchDotNet.Tests {
         [TestMethod]
         public void Test_GetChannelFeedPosts() {
             string channelId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPosts(channelId, new CursorPagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPosts(channelId, new CursorPagination()).Result);
         }
 
         [TestMethod]
         public void Test_GetChannelFeedPost() {
             string channelId = "32220409"; // travy92
             string postId = "322204091482884560";
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPost(channelId, postId));
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPost(channelId, postId).Result);
         }
 
         // Test_CreateChannelFeedPost
@@ -69,11 +69,11 @@ namespace TwitchDotNet.Tests {
             string content = "Test Post from TwitchDotNet Unit Test";
 
             // Create post
-            var response = twitchClientAuthenticated.CreateChannelFeedPost(channelId, content);
+            var response = twitchClientAuthenticated.CreateChannelFeedPost(channelId, content).Result;
             Assert.IsNotNull(response);
 
             // Delete post
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPost(channelId, response.post.id.ToString()));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPost(channelId, response.post.id.ToString()).Result);
         }
 
         // Test_CreateReactionToChannelFeedPost
@@ -85,17 +85,17 @@ namespace TwitchDotNet.Tests {
             string emoteId = "endorse";
 
             // Create reaction to post
-            Assert.IsNotNull(twitchClientAuthenticated.CreateReactionToChannelFeedPost(channelId, postId, emoteId));
+            Assert.IsNotNull(twitchClientAuthenticated.CreateReactionToChannelFeedPost(channelId, postId, emoteId).Result);
 
             // Delete reaction to post
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteReactionToChannelFeedPost(channelId, postId, emoteId));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteReactionToChannelFeedPost(channelId, postId, emoteId).Result);
         }
 
         [TestMethod]
         public void Test_GetChannelFeedPostComments() {
             string channelId = "32220409"; // travy92
             string postId = "322204091482884560";
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPostComments(channelId, postId, new CursorPagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelFeedPostComments(channelId, postId, new CursorPagination()).Result);
         }
 
         // Test_CreateChannelFeedPostComment
@@ -107,11 +107,11 @@ namespace TwitchDotNet.Tests {
             string content = "Test Comment from TwitchDotNet Unit Test";
 
             // Create post comment
-            var response = twitchClientAuthenticated.CreateChannelFeedPostComment(channelId, postId, content);
+            var response = twitchClientAuthenticated.CreateChannelFeedPostComment(channelId, postId, content).Result;
             Assert.IsNotNull(response);
 
             // Delete post comment
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPostComment(channelId, postId, response.id.ToString()));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteChannelFeedPostComment(channelId, postId, response.id.ToString()).Result);
         }
 
         // Test_CreateReactionToChannelFeedPostComment
@@ -124,10 +124,10 @@ namespace TwitchDotNet.Tests {
             string emoteId = "endorse";
             
             // Create reaction to post comment
-            Assert.IsNotNull(twitchClientAuthenticated.CreateReactionToChannelFeedPostComment(channelId, postId, commentId, emoteId));
+            Assert.IsNotNull(twitchClientAuthenticated.CreateReactionToChannelFeedPostComment(channelId, postId, commentId, emoteId).Result);
 
             // Delete reaction to post comment
-            Assert.IsNotNull(twitchClientAuthenticated.DeleteReactionToChannelFeedPostComment(channelId, postId, commentId, emoteId));
+            Assert.IsNotNull(twitchClientAuthenticated.DeleteReactionToChannelFeedPostComment(channelId, postId, commentId, emoteId).Result);
         }
 
         #endregion
@@ -136,7 +136,7 @@ namespace TwitchDotNet.Tests {
 
         [TestMethod]
         public void Test_GetChannel() {
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannel());
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannel().Result);
         }
 
         [TestMethod]
@@ -146,39 +146,39 @@ namespace TwitchDotNet.Tests {
             string game = "League of Legends";
             string delay = "0";
             bool channelFeedEnabled = false;
-            Assert.IsNotNull(twitchClientAuthenticated.UpdateChannel(channelId, status, game, delay, channelFeedEnabled));
+            Assert.IsNotNull(twitchClientAuthenticated.UpdateChannel(channelId, status, game, delay, channelFeedEnabled).Result);
         }
 
         [TestMethod]
         public void Test_GetChannelEditors() {
             string channelId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.GetChannelEditors(channelId));
+            Assert.IsNotNull(twitchClientAuthenticated.GetChannelEditors(channelId).Result);
         }
 
         [TestMethod]
         public void Test_GetChannelSubscribers() {
             // Expecting null as I don't have any subscribers
             string channelId = "28036688"; // travy92
-            Assert.IsNull(twitchClientAuthenticated.GetChannelSubscribers(channelId, new Pagination()));
+            Assert.IsNull(twitchClientAuthenticated.GetChannelSubscribers(channelId, new Pagination()).Result);
         }
 
         [TestMethod]
         public void Test_CheckChannelSubscriptionByUser() {
             string channelId = "32220409"; // travy92
             string targetUserId = "28036688"; // trick2g
-            Assert.IsNotNull(twitchClientAuthenticated.CheckChannelSubscriptionByUser(channelId, targetUserId));
+            Assert.IsNotNull(twitchClientAuthenticated.CheckChannelSubscriptionByUser(channelId, targetUserId).Result);
         }
 
         [TestMethod]
         public void Test_StartChannelCommercial() {
             string channelId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.ResetChannelStreamKey(channelId));
+            Assert.IsNotNull(twitchClientAuthenticated.ResetChannelStreamKey(channelId).Result);
         }
 
         [TestMethod]
         public void Test_ResetChannelStreamKey() {
             string channelId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.ResetChannelStreamKey(channelId));
+            Assert.IsNotNull(twitchClientAuthenticated.ResetChannelStreamKey(channelId).Result);
         }
 
         #endregion
@@ -193,10 +193,10 @@ namespace TwitchDotNet.Tests {
             string game = "Poker";
 
             // Follow game
-            Assert.IsNotNull(twitchClientAuthenticated.FollowGame(username, game));
+            Assert.IsNotNull(twitchClientAuthenticated.FollowGame(username, game).Result);
 
             // Unfollow game
-            Assert.IsNotNull(twitchClientAuthenticated.UnfollowGame(username, game));
+            Assert.IsNotNull(twitchClientAuthenticated.UnfollowGame(username, game).Result);
         }
 
         #endregion
@@ -205,7 +205,7 @@ namespace TwitchDotNet.Tests {
 
         [TestMethod]
         public void Test_GetFollowedStreams() {
-            Assert.IsNotNull(twitchClientAuthenticated.GetFollowedStreams(new Pagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetFollowedStreams(new Pagination()).Result);
         }
 
         #endregion
@@ -214,20 +214,20 @@ namespace TwitchDotNet.Tests {
 
         [TestMethod]
         public void Test_GetUser() {
-            Assert.IsNotNull(twitchClientAuthenticated.GetUser());
+            Assert.IsNotNull(twitchClientAuthenticated.GetUser().Result);
         }
 
         [TestMethod]
         public void Test_GetUserEmotes() {
             string userId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.GetUserEmotes(userId));
+            Assert.IsNotNull(twitchClientAuthenticated.GetUserEmotes(userId).Result);
         }
 
         [TestMethod]
         public void Test_CheckUserSubscriptionByChannel() {
             string userId = "32220409"; // travy92
             string channelId = "28036688"; // trick2g
-            Assert.IsNotNull(twitchClientAuthenticated.CheckUserSubscriptionByChannel(userId, channelId));
+            Assert.IsNotNull(twitchClientAuthenticated.CheckUserSubscriptionByChannel(userId, channelId).Result);
         }
 
         // Test_FollowChannel
@@ -238,16 +238,16 @@ namespace TwitchDotNet.Tests {
             string targetChannelId = "44322889"; // dallas
 
             // Follow channel
-            Assert.IsNotNull(twitchClientAuthenticated.FollowChannel(userId, targetChannelId));
+            Assert.IsNotNull(twitchClientAuthenticated.FollowChannel(userId, targetChannelId).Result);
 
             // Unfollow Channel
-            Assert.IsNotNull(twitchClientAuthenticated.UnfollowChannel(userId, targetChannelId));
+            Assert.IsNotNull(twitchClientAuthenticated.UnfollowChannel(userId, targetChannelId).Result);
         }
 
         [TestMethod]
         public void Test_GetUserBlockList() {
             string userId = "32220409"; // travy92
-            Assert.IsNotNull(twitchClientAuthenticated.GetUserBlockList(userId, new Pagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetUserBlockList(userId, new Pagination()).Result);
         }
 
         // Test_BlockUser
@@ -258,10 +258,10 @@ namespace TwitchDotNet.Tests {
             string targetUserId = "28036688"; // trick2g
 
             // Block user
-            Assert.IsNotNull(twitchClientAuthenticated.BlockUser(userId, targetUserId));
+            Assert.IsNotNull(twitchClientAuthenticated.BlockUser(userId, targetUserId).Result);
 
             // Unblock user
-            Assert.IsNotNull(twitchClientAuthenticated.UnblockUser(userId, targetUserId));
+            Assert.IsNotNull(twitchClientAuthenticated.UnblockUser(userId, targetUserId).Result);
         }
 
         #endregion
@@ -270,7 +270,7 @@ namespace TwitchDotNet.Tests {
 
         [TestMethod]
         public void Test_GetFollowedVideos() {
-            Assert.IsNotNull(twitchClientAuthenticated.GetFollowedVideos(new Pagination()));
+            Assert.IsNotNull(twitchClientAuthenticated.GetFollowedVideos(new Pagination()).Result);
         }
 
         #endregion

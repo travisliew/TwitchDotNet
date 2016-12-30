@@ -15,68 +15,68 @@ namespace TwitchDotNet.Interfaces {
 
         #region General - https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api
 
-        dynamic GetIdByName(string _name);
-        dynamic GetRoot();
+        Task<dynamic> GetIdByName(string _name);
+        Task<dynamic> GetRoot();
 
         #endregion
 
         #region ChannelFeed - Https://dev.twitch.tv/docs/v5/reference/channel-feed/
 
-        dynamic GetChannelFeedPosts(string _channelId, CursorPagination _pagination, long _comments = 5);
-        dynamic GetChannelFeedPost(string _channelId, string _postId, long _comments = 5);
-        dynamic CreateChannelFeedPost(string _channelId, string _content, bool _share = false);
-        dynamic DeleteChannelFeedPost(string _channelId, string _postId);
-        dynamic CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
-        dynamic DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
-        dynamic GetChannelFeedPostComments(string _channelId, string _postId, CursorPagination _pagination);
-        dynamic CreateChannelFeedPostComment(string _channelId, string _postId, string _content);
-        dynamic DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId);
-        dynamic CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);
-        dynamic DeleteReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);
+        Task<dynamic> GetChannelFeedPosts(string _channelId, CursorPagination _pagination, long _comments = 5);
+        Task<dynamic> GetChannelFeedPost(string _channelId, string _postId, long _comments = 5);
+        Task<dynamic> CreateChannelFeedPost(string _channelId, string _content, bool _share = false);
+        Task<dynamic> DeleteChannelFeedPost(string _channelId, string _postId);
+        Task<dynamic> CreateReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
+        Task<dynamic> DeleteReactionToChannelFeedPost(string _channelId, string _postId, string _emoteId);
+        Task<dynamic> GetChannelFeedPostComments(string _channelId, string _postId, CursorPagination _pagination);
+        Task<dynamic> CreateChannelFeedPostComment(string _channelId, string _postId, string _content);
+        Task<dynamic> DeleteChannelFeedPostComment(string _channelId, string _postId, string _commentId);
+        Task<dynamic> CreateReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);
+        Task<dynamic> DeleteReactionToChannelFeedPostComment(string _channelId, string _postId, string _commentId, string _emoteId);
 
         #endregion
 
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
 
-        dynamic GetChannel();
-        dynamic UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled);
-        dynamic GetChannelEditors(string _channelId);
-        dynamic GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc);
-        dynamic CheckChannelSubscriptionByUser(string _channelId, string _targetUserId);
-        dynamic StartChannelCommercial(string _channelId);
-        dynamic ResetChannelStreamKey(string _channelId);
+        Task<dynamic> GetChannel();
+        Task<dynamic> UpdateChannel(string _channelId, string _status, string _game, string _delay, bool _channelFeedEnabled);
+        Task<dynamic> GetChannelEditors(string _channelId);
+        Task<dynamic> GetChannelSubscribers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.asc);
+        Task<dynamic> CheckChannelSubscriptionByUser(string _channelId, string _targetUserId);
+        Task<dynamic> StartChannelCommercial(string _channelId);
+        Task<dynamic> ResetChannelStreamKey(string _channelId);
 
         #endregion
 
         #region Game - Unsupported https://discuss.dev.twitch.tv/t/game-following-requests/2186
 
-        dynamic FollowGame(string _username, string _game);
-        dynamic UnfollowGame(string _username, string _game);
+        Task<dynamic> FollowGame(string _username, string _game);
+        Task<dynamic> UnfollowGame(string _username, string _game);
 
         #endregion
 
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
-        dynamic GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live);
+        Task<dynamic> GetFollowedStreams(Pagination _pagination, StreamType _streamType = StreamType.live);
 
         #endregion
 
         #region Users - Https://dev.twitch.tv/docs/v5/reference/users/
 
-        dynamic GetUser();
-        dynamic GetUserEmotes(string _userId);
-        dynamic CheckUserSubscriptionByChannel(string _userId, string _channelId);
-        dynamic FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false);
-        dynamic UnfollowChannel(string _userId, string _targetChannelId);
-        dynamic GetUserBlockList(string _userId, Pagination _pagination);
-        dynamic BlockUser(string _userId, string _targetUserId);
-        dynamic UnblockUser(string _userId, string _targetUserId);
+        Task<dynamic> GetUser();
+        Task<dynamic> GetUserEmotes(string _userId);
+        Task<dynamic> CheckUserSubscriptionByChannel(string _userId, string _channelId);
+        Task<dynamic> FollowChannel(string _userId, string _targetChannelId, bool _enableNotifications = false);
+        Task<dynamic> UnfollowChannel(string _userId, string _targetChannelId);
+        Task<dynamic> GetUserBlockList(string _userId, Pagination _pagination);
+        Task<dynamic> BlockUser(string _userId, string _targetUserId);
+        Task<dynamic> UnblockUser(string _userId, string _targetUserId);
 
         #endregion
 
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
 
-        dynamic GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight);
+        Task<dynamic> GetFollowedVideos(Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight);
 
         #endregion
     }

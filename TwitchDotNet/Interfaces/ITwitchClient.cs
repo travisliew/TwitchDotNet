@@ -15,72 +15,72 @@ namespace TwitchDotNet.Interfaces {
 
         #region Channels - Https://dev.twitch.tv/docs/v5/reference/channels/
         
-        dynamic GetChannel(string _channelId);
-        dynamic GetChannelFollowers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.desc);
-        dynamic GetChannelTeams(string _channelId);
-        dynamic GetChannelVideos(string _channelId, Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _language = default(List<string>), SortBy _sort = SortBy.time);
+        Task<dynamic> GetChannel(string _channelId);
+        Task<dynamic> GetChannelFollowers(string _channelId, Pagination _pagination, SortDirection _direction = SortDirection.desc);
+        Task<dynamic> GetChannelTeams(string _channelId);
+        Task<dynamic> GetChannelVideos(string _channelId, Pagination _pagination, BroadcastType _broadcastType = BroadcastType.highlight, List<string> _language = default(List<string>), SortBy _sort = SortBy.time);
 
         #endregion
 
         #region Chat - Https://dev.twitch.tv/docs/v5/reference/chat/
 
-        dynamic GetChatBadgesByChannel(string _channelId);
-        dynamic GetChatBadgesBySet(List<string> _emoteSets = default(List<string>));
-        dynamic GetEmoticons();
+        Task<dynamic> GetChatBadgesByChannel(string _channelId);
+        Task<dynamic> GetChatBadgesBySet(List<string> _emoteSets = default(List<string>));
+        Task<dynamic> GetEmoticons();
 
         #endregion
 
         #region Games - Https://dev.twitch.tv/docs/v5/reference/games/
 
-        dynamic GetTopGames(Pagination _pagination);
-        dynamic GetFollowedGames(string _username, Pagination _pagination);
+        Task<dynamic> GetTopGames(Pagination _pagination);
+        Task<dynamic> GetFollowedGames(string _username, Pagination _pagination);
 
         #endregion
 
         #region Ingests - Https://dev.twitch.tv/docs/v5/reference/ingests/
 
-        dynamic GetIngests();
+        Task<dynamic> GetIngests();
 
         #endregion
 
         #region Search - Https://dev.twitch.tv/docs/v5/reference/search/
 
-        dynamic SearchChannels(string _query, Pagination _pagination);
-        dynamic SearchStreams(string _query, Pagination _pagination, bool _hls = true);
-        dynamic SearchGames(string _query, bool _live = false);
+        Task<dynamic> SearchChannels(string _query, Pagination _pagination);
+        Task<dynamic> SearchStreams(string _query, Pagination _pagination, bool _hls = true);
+        Task<dynamic> SearchGames(string _query, bool _live = false);
 
         #endregion
 
         #region Streams - Https://dev.twitch.tv/docs/v5/reference/streams/
 
-        dynamic GetStreams(Pagination _pagination, string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>));
-        dynamic GetStream(string _channelId, StreamType _streamType = StreamType.live);
-        dynamic GetFeaturedStreams(Pagination _pagination);
-        dynamic GetStreamsSummary(string _game = default(string));
+        Task<dynamic> GetStreams(Pagination _pagination, string _game = default(string), List<string> _channels = default(List<string>), StreamType _streamType = StreamType.live, List<string> _languages = default(List<string>));
+        Task<dynamic> GetStream(string _channelId, StreamType _streamType = StreamType.live);
+        Task<dynamic> GetFeaturedStreams(Pagination _pagination);
+        Task<dynamic> GetStreamsSummary(string _game = default(string));
 
         #endregion
 
         #region Teams - Https://dev.twitch.tv/docs/v5/reference/teams/
 
-        dynamic GetTeams(Pagination _pagination);
-        dynamic GetTeam(string _teamName);
+        Task<dynamic> GetTeams(Pagination _pagination);
+        Task<dynamic> GetTeam(string _teamName);
 
         #endregion
 
         #region Users - Https://dev.twitch.tv/docs/v5/reference/users/
         
-        dynamic GetUser(string _userId);
-        dynamic GetUserFollowedChannels(string _userId, Pagination _pagination, SortDirection _direction = SortDirection.desc, SortKey _sortBy = SortKey.created_at);
-        dynamic CheckUserFollowsByChannel(string _userId, string _channelId);
+        Task<dynamic> GetUser(string _userId);
+        Task<dynamic> GetUserFollowedChannels(string _userId, Pagination _pagination, SortDirection _direction = SortDirection.desc, SortKey _sortBy = SortKey.created_at);
+        Task<dynamic> CheckUserFollowsByChannel(string _userId, string _channelId);
         // Unofficial
-        dynamic CheckUserFollowsByGame(string _username, string _game);
+        Task<dynamic> CheckUserFollowsByGame(string _username, string _game);
 
         #endregion
 
         #region Videos - Https://dev.twitch.tv/docs/v5/reference/videos/
 
-        dynamic GetVideo(string _videoId);
-        dynamic GetTopVideos(Pagination _pagination, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight);
+        Task<dynamic> GetVideo(string _videoId);
+        Task<dynamic> GetTopVideos(Pagination _pagination, string _game = default(string), Period _period = Period.week, BroadcastType _broadcastType = BroadcastType.highlight);
 
         #endregion
     }
