@@ -75,8 +75,8 @@ namespace TwitchDotNet.Tests
         }
 
         [TestMethod]
-        public void Test_GetChatBadgesBySet() {
-            Assert.IsNotNull(twitchClient.GetChatBadgesBySet().Result);
+        public void Test_GetChatEmoticonsBySet() {
+            Assert.IsNotNull(twitchClient.GetChatEmoticonsBySet().Result);
         }
 
         [TestMethod]

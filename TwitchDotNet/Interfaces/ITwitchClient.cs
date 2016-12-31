@@ -31,7 +31,7 @@ namespace TwitchDotNet.Interfaces {
         #region Chat - Https://dev.twitch.tv/docs/v5/reference/chat/
 
         Task<dynamic> GetChatBadgesByChannel(string _channelId);
-        Task<dynamic> GetChatBadgesBySet(List<string> _emoteSets = default(List<string>));
+        Task<dynamic> GetChatEmoticonsBySet(List<string> _emoteSets = default(List<string>));
         Task<dynamic> GetEmoticons();
 
         #endregion
