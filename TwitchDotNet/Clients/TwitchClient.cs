@@ -121,8 +121,8 @@ namespace TwitchDotNet.Clients {
         /// </summary>
         /// <param name="_emoteSets">Emote set</param>
         /// <returns></returns>
-        public async Task<dynamic> GetChatBadgesBySet(List<string> _emoteSets = default(List<string>)) {
-            var request = httpHelperClient.CreateHttpRequest($"kraken/games/top", HttpMethod.Get);
+        public async Task<dynamic> GetChatEmoticonsBySet(List<string> _emoteSets = default(List<string>)) {
+            var request = httpHelperClient.CreateHttpRequest($"kraken/chat/emoticon_images", HttpMethod.Get);
             if (_emoteSets != default(List<string>) && _emoteSets.Count > 0) { httpHelperClient.AddQueryString(request, "emotesets", string.Join(",", _emoteSets)); }
             return await httpHelperClient.ExecuteRequest(request);
         }
