@@ -16,7 +16,7 @@ namespace TwitchDotNet.Clients {
     /// Authenticated TwitchClient
     /// Provides an interface for an authenticated session to retrieve data from Twitch API's (where authentication is required)
     /// </summary>
-    public class TwitchClientAuthenticated : TwitchClient, ITwitchClientAuthenticated {
+    public class TwitchClientAuthenticated : TwitchClient, ITwitchClientAuthenticated, ITwitchClient {
 
         /// <summary>
         /// Initialise HttpClient for authenticated requests
