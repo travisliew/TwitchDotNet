@@ -15,7 +15,7 @@ Follow these instructions to get started with TwitchDotNet
 
 #### Add a reference to project
 
-Build the project and add a reference to the `TwitchDotNet.dll` (locaed in `../bin/<platform (e.g. x86)>/<config (e.g. Debug)>/dll`, or add the project  to your existing solution (via right-clicking your solution in Visual Studio and selecting Add -> Existing Project -> `/path/to/local/repo/TwitchDotNet.csproj`)
+Build the project and add a reference to the `TwitchDotNet.dll` (located in `../bin/<platform (e.g. x86)>/<config (e.g. Debug)>/dll`, or add the project  to your existing solution (via right-clicking your solution in Visual Studio and selecting Add -> Existing Project -> `/path/to/local/repo/TwitchDotNet.csproj`)
 
 ### Usage
 
