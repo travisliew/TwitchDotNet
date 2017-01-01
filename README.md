@@ -91,7 +91,7 @@ TWITCH_API_BASE_URL | https://api.twitch.tv | Base Twitch API Url
 
 The test project will use these values to initialise the `TwitchClient(s)` and perform the tests.
 
-<b>Note: OAuth token is manually specified at this stage -- get it from `Fiddler`, `Wireshark` when making using `OAuth2Broker` or directly from browser using the `Inspector` and passing in the auth url manually.</b>
+<b>Note: OAuth token is manually specified at this stage -- get it from `Fiddler`, `Wireshark` when using `OAuth2Broker` or directly from browser using the `Inspector` and passing in the auth url manually.</b>
 
 ## Nuget
 
