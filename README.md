@@ -96,3 +96,13 @@ The test project will use these values to initialise the `TwitchClient(s)` and p
 ## Nuget
 
 Coming soon
+
+## Authors
+
+- **Travis Liew** - [travisliew](https://github.com/travisliew)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
