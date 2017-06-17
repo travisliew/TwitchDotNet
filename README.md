@@ -3,7 +3,7 @@ A .NETCore (UWP) C# Library for Twitch API v5.
 
 ## Getting Started
 
-Follow these instructions to get started with TwitchDotNet
+Follow these instructions to get started with TwitchDotNet. To talk to other users of the Twitch API, you can go to this [Discord server](https://discord.gg/8NXaEyV)
 
 ### Prerequisites
 
