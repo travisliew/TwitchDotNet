@@ -90,11 +90,14 @@ namespace TwitchDotNet.Helpers {
             if (!string.IsNullOrEmpty(_value)) {
                 UriBuilder uriBuilder = new UriBuilder(_request.RequestUri);
 
+                // URI Escape _value
+                string _escapedValue = Uri.EscapeDataString(_value);
+
                 // Build query string
                 if (uriBuilder.Query != null && uriBuilder.Query.Length > 1) { // Append to existing query string
-                    uriBuilder.Query = $"{uriBuilder.Query.Substring(1)}&{_key}={_value}"; // ..?..&key=value
+                    uriBuilder.Query = $"{uriBuilder.Query.Substring(1)}&{_key}={_escapedValue}"; // ..?..&key=value
                 } else { // New query string
-                    uriBuilder.Query = $"{_key}={_value}";
+                    uriBuilder.Query = $"{_key}={_escapedValue}";
                 }
 
                 // Assign Uri to original request

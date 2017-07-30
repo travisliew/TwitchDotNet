@@ -137,6 +137,7 @@ namespace TwitchDotNet.Tests
         [TestMethod]
         public void Test_GetStreams() { 
             Assert.IsNotNull(twitchClient.GetStreams(new Pagination()).Result);
+            Assert.IsNotNull(twitchClient.GetStreams(new Pagination(), "Dungeons & Dragons").Result);
         }
 
         [TestMethod]
